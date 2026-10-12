@@ -1,0 +1,281 @@
+/* @settings
+ *
+ * name: Minimal — Pastel Dark Orange
+ * id: minimal-pastel-dark-orange
+ * settings:
+ *    -
+ *        id: pastel-dark-colors
+ *        title: Пастельная тёмно-оранжевая схема
+ *        type: heading
+ *        level: 2
+ *
+ *    -
+ *        id: bg1
+ *        title: Основной фон
+ *        description: Основной фон заметок и редактора
+ *        type: variable-color
+ *        format: hex
+ *        default: '#302d2c'
+ *
+ *    -
+ *        id: bg2
+ *        title: Вторичный фон
+ *        description: Боковые панели и дополнительные области
+ *        type: variable-color
+ *        format: hex
+ *        default: '#393534'
+ *
+ *    -
+ *        id: bg3
+ *        title: Активный фон
+ *        description: Фон активных вкладок и выделенных элементов
+ *        type: variable-color
+ *        format: hex
+ *        default: '#46403e'
+ *
+ *    -
+ *        id: ui1
+ *        title: Основные границы
+ *        type: variable-color
+ *        format: hex
+ *        default: '#5b514d'
+ *
+ *    -
+ *        id: ui2
+ *        title: Выделенные границы
+ *        type: variable-color
+ *        format: hex
+ *        default: '#75635b'
+ *
+ *    -
+ *        id: ui3
+ *        title: Активные границы
+ *        type: variable-color
+ *        format: hex
+ *        default: '#d08b6b'
+ *
+ *    -
+ *        id: tx1
+ *        title: Основной текст
+ *        type: variable-color
+ *        format: hex
+ *        default: '#ded5d0'
+ *
+ *    -
+ *        id: tx2
+ *        title: Вторичный текст
+ *        type: variable-color
+ *        format: hex
+ *        default: '#b7aaa3'
+ *
+ *    -
+ *        id: tx3
+ *        title: Приглушённый текст
+ *        type: variable-color
+ *        format: hex
+ *        default: '#887c76'
+ *
+ *    -
+ *        id: ax1
+ *        title: Основной акцент
+ *        description: Ссылки, активные элементы и выделения
+ *        type: variable-color
+ *        format: hex
+ *        default: '#d08b6b'
+ *
+ *    -
+ *        id: ax2
+ *        title: Акцент при наведении
+ *        type: variable-color
+ *        format: hex
+ *        default: '#e0a181'
+ *
+ *    -
+ *        id: ax3
+ *        title: Интерактивный акцент
+ *        type: variable-color
+ *        format: hex
+ *        default: '#b87358'
+ *
+ *    -
+ *        id: sp1
+ *        title: Текст на акцентном фоне
+ *        type: variable-color
+ *        format: hex
+ *        default: '#292322'
+ *
+ *    -
+ *        id: hl1
+ *        title: Основное выделение
+ *        type: variable-color
+ *        format: hex
+ *        default: '#805846'
+ *
+ *    -
+ *        id: hl2
+ *        title: Мягкое выделение
+ *        type: variable-color
+ *        format: hex
+ *        default: '#62483d'
+ *
+ *    -
+ *        id: code-background
+ *        title: Фон кода
+ *        type: variable-color
+ *        format: hex
+ *        default: '#272322'
+ *
+ *    -
+ *        id: code-normal
+ *        title: Текст кода
+ *        type: variable-color
+ *        format: hex
+ *        default: '#d2c3bb'
+ *
+ */
+
+/* Основная палитра Minimal */
+.theme-dark {
+    --base-h: 20;
+    --base-s: 8%;
+    --base-l: 20%;
+
+    --bg1: #302d2c;
+    --bg2: #393534;
+    --bg3: #46403e;
+
+    --ui1: #5b514d;
+    --ui2: #75635b;
+    --ui3: #d08b6b;
+
+    --tx1: #ded5d0;
+    --tx2: #b7aaa3;
+    --tx3: #887c76;
+
+    --ax1: #d08b6b;
+    --ax2: #e0a181;
+    --ax3: #b87358;
+
+    --sp1: #292322;
+
+    --hl1: rgba(208, 139, 107, 0.42);
+    --hl2: rgba(208, 139, 107, 0.20);
+
+    --active-line-bg: rgba(208, 139, 107, 0.08);
+
+    --code-background: #272322;
+    --code-normal: #d2c3bb;
+
+    --blockquote-color: #d09a7e;
+    --blockquote-background-color: rgba(208, 139, 107, 0.08);
+    --blockquote-border-color: #b87358;
+
+    --link-color: #d08b6b;
+    --link-color-hover: #e0a181;
+
+    --interactive-accent: #b87358;
+    --interactive-accent-hover: #d08b6b;
+}
+
+/* Цветовая шкала Minimal */
+.theme-dark {
+    --red: #c77d6d;
+    --orange: #d08b6b;
+    --yellow: #d2aa72;
+    --green: #9eaa83;
+    --cyan: #86aaa2;
+    --blue: #8da5b8;
+    --purple: #a995b5;
+    --pink: #c49aa3;
+}
+
+/* Вкладки */
+.theme-dark .workspace-tab-header.is-active {
+    background-color: var(--bg3);
+    color: var(--tx1);
+    box-shadow: inset 0 -2px 0 var(--ax1);
+}
+
+.theme-dark .workspace-tab-header:hover {
+    background-color: rgba(208, 139, 107, 0.12);
+}
+
+/* Файлы и папки */
+.theme-dark .nav-file-title:hover,
+.theme-dark .nav-folder-title:hover {
+    background-color: rgba(208, 139, 107, 0.12);
+}
+
+.theme-dark .nav-file-title.is-active,
+.theme-dark .nav-folder-title.is-active {
+    background-color: rgba(208, 139, 107, 0.20);
+    color: var(--ax2);
+}
+
+/* Выделение текста */
+.theme-dark ::selection {
+    background-color: var(--hl1);
+    color: var(--tx1);
+}
+
+/* Меню и подсказки */
+.theme-dark .menu-item-selected,
+.theme-dark .suggestion-item.is-selected {
+    background-color: var(--hl2);
+    color: var(--tx1);
+}
+
+.theme-dark .menu-item:hover {
+    background-color: rgba(208, 139, 107, 0.14);
+}
+
+/* Поля ввода */
+.theme-dark input,
+.theme-dark textarea,
+.theme-dark select,
+.theme-dark .search-input-container {
+    background-color: #272322;
+    border-color: var(--ui1);
+    color: var(--tx1);
+}
+
+.theme-dark input:focus,
+.theme-dark textarea:focus,
+.theme-dark select:focus {
+    border-color: var(--ax1);
+    box-shadow: 0 0 0 2px rgba(208, 139, 107, 0.12);
+}
+
+/* Кнопки */
+.theme-dark button.mod-cta {
+    background-color: var(--ax3);
+    color: var(--sp1);
+}
+
+.theme-dark button.mod-cta:hover {
+    background-color: var(--ax1);
+}
+
+/* Заголовки */
+.theme-dark .markdown-rendered h1,
+.theme-dark .markdown-rendered h2,
+.theme-dark .markdown-rendered h3,
+.theme-dark .markdown-rendered h4 {
+    color: var(--tx1);
+}
+
+/* Код */
+.theme-dark code,
+.theme-dark pre {
+    background-color: var(--code-background);
+    color: var(--code-normal);
+}
+
+/* Курсор и активная строка */
+.theme-dark .cm-cursor {
+    border-left-color: var(--ax1);
+}
+
+.theme-dark .cm-activeLine {
+    background-color: var(--active-line-bg);
+}
