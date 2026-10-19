@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bbv1lj3eqpplo"]
+
+[node name="Match" type="Node2D" unique_id=1689643679]
+
+[node name="World" type="Node2D" parent="." unique_id=1162102265]
+
+[node name="Ground" type="TileMapLayer" parent="World" unique_id=12242233]
+
+[node name="Obstacles" type="TileMapLayer" parent="World" unique_id=140093606]
+
+[node name="Pickups" type="Node2D" parent="World" unique_id=558650903]
+position = Vector2(40, -24)
+
+[node name="Wizards" type="Node2D" parent="World" unique_id=196619447]
+position = Vector2(88, -24)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=269317906]
+
+[node name="TurnManager" type="Node" parent="." unique_id=475044912]
+
+[node name="SpellSystem" type="Node" parent="." unique_id=1857105711]
+
+[node name="MatchState" type="Node" parent="." unique_id=1913172908]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=172260040]
+
+[node name="TurnLabel" type="Label" parent="HUD" unique_id=1020525848]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0120001
+offset_left = 1056.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -591.77606
+
+[node name="SpellButton" type="Button" parent="HUD" unique_id=1915864536]
+anchors_preset = -1
+offset_left = 16.0
+offset_top = 544.0
+offset_right = 200.0
+offset_bottom = 616.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1625554576]
+position = Vector2(576, 320)

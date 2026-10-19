@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ywbnf735j4aj"]
+
+[node name="Wizard" type="CharacterBody2D" unique_id=1428041276]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1470571424]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1920189667]
+
+[node name="Node" type="Node" parent="." unique_id=1133412325]
+
+[node name="NameLabel" type="Label" parent="." unique_id=200422044]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="SelectionIndicator" type="Sprite2D" parent="." unique_id=1620565146]
