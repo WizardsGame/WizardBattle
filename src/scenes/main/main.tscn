@@ -1,42 +1,9 @@
 [gd_scene format=3 uid="uid://c5bo1ygo8taeo"]
 
-[ext_resource type="PackedScene" uid="uid://bbv1lj3eqpplo" path="res://src/scenes/game/match.tscn" id="1_hsw67"]
-
-[sub_resource type="CSharpScript" id="CSharpScript_7dm0k"]
-script/source = "using Godot;
-using System;
-
-public partial class Node2d : Node2D
-{
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-}
-"
-
-[node name="Main" type="Node" unique_id=812493651]
-script = SubResource("CSharpScript_7dm0k")
-
-[node name="NetworkManager" type="Node" parent="." unique_id=1647927109]
-
-[node name="App" type="Node" parent="." unique_id=1281998982]
-
-[node name="MainMenu" type="Control" parent="App" unique_id=1811954417]
+[node name="MainMenu" type="Control" unique_id=247318027]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Lobby" type="Control" parent="App" unique_id=1738682973]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Match" parent="." unique_id=1689643679 instance=ExtResource("1_hsw67")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
