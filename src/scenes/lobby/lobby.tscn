@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c87yj1hlm3o5l"]
+
+[node name="Lobby" type="Control" unique_id=2056619820]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

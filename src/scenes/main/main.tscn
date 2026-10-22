@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5bo1ygo8taeo"]
 
-[ext_resource type="PackedScene" uid="uid://bbv1lj3eqpplo" path="res://src/scenes/main/match.tscn" id="1_hsw67"]
+[ext_resource type="PackedScene" uid="uid://bbv1lj3eqpplo" path="res://src/scenes/game/match.tscn" id="1_hsw67"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_7dm0k"]
 script/source = "using Godot;
