@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bbv1lj3eqpplo"]
 
 [ext_resource type="TileSet" uid="uid://dccyb3ivejq8s" path="res://src/assets/floor_tile/tile_map/floor_rock.tres" id="1_rfa1d"]
+[ext_resource type="TileSet" uid="uid://bkmh84mhy0hhg" path="res://src/assets/wall_tile/tile_map/wall.tres" id="2_dmjg0"]
 
 [node name="Match" type="Node2D" unique_id=1689643679]
 
@@ -11,6 +12,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAI
 tile_set = ExtResource("1_rfa1d")
 
 [node name="Obstacles" type="TileMapLayer" parent="World" unique_id=140093606]
+tile_map_data = PackedByteArray("AAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAkAAAAAAAAAAAA=")
+tile_set = ExtResource("2_dmjg0")
 
 [node name="Pickups" type="Node2D" parent="World" unique_id=558650903]
 position = Vector2(40, -24)
