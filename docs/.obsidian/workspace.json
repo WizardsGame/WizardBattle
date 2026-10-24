@@ -11,10 +11,14 @@
             "id": "cec5d6c4532b5293",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Стиль.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Новая вкладка"
+              "title": "Стиль"
             }
           }
         ]
@@ -75,8 +79,7 @@
               "title": "Закладки"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -207,8 +210,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "1c7041608f86ad3e",
+  "active": "cec5d6c4532b5293",
   "lastOpenFiles": [
+    "Текстуры/Плитки.md",
+    "Текстуры",
+    "Без названия.md",
+    "Fllor.png",
     "Excalidraw/Drawing 2026-10-12 18.01.59.excalidraw.md",
     "Без названия.base",
     "Excalidraw",
@@ -241,19 +248,15 @@
     "Учёба/Vk.md",
     "Учёба/Image/Pasted Image 20261003101705_011.png",
     "Учёба/Image/Pasted image 20260915095425.png",
-    "Excalidraw/Drawing 2026-10-03 10.37.53.excalidraw.md",
-    "Учёба/Тест.md",
     "Без названия.canvas",
     "Setitng",
     "Setitng/Excalidraw/Scripts/Downloaded",
     "Setitng/Excalidraw/Scripts",
     "Setitng/Excalidraw",
     "Учёба/Проекты/WizardBattle/диздок.excalidraw",
-    "Учёба/Проекты/WizardBattle",
     "Личное/Изображения/Pasted Image 20260303150046_537.png",
     "Личное/Изображения/Pasted Image 20260303150140_327.png",
     "Личное/Изображения/Pasted Image 20260303145902_053.png",
-    "Личное/Изображения/Pasted Image 20260314131445_936.png",
-    "Личное/Изображения/Pasted Image 20260303145539_185.png"
+    "Личное/Изображения/Pasted Image 20260314131445_936.png"
   ]
 }
