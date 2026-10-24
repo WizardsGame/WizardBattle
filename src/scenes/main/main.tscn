@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://c5bo1ygo8taeo"]
 
+[ext_resource type="Script" uid="uid://2mqbsqlonfg3" path="res://src/scripts/main/MainMenu.cs" id="1_hsw67"]
+
 [node name="MainMenu" type="Control" unique_id=247318027]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +9,56 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hsw67")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1519561819]
+custom_minimum_size = Vector2(700, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -211.0
+offset_top = -20.0
+offset_right = 243.0
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -100)
+offset_transform_visual_only = false
+theme_override_constants/separation = 14
+
+[node name="GameNameLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=716234457]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 65
+text = "Wizard Battle"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1841117138]
+layout_mode = 2
+
+[node name="CreateLobbyButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=475895661]
+custom_minimum_size = Vector2(310, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Создать"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=367602229]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="JoinLobbyButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=2026795102]
+custom_minimum_size = Vector2(310, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Подключиться"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=121378390]
+custom_minimum_size = Vector2(350, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "Настройки"
