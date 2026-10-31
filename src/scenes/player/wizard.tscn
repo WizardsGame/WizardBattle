@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://ywbnf735j4aj"]
 
-[node name="Wizard" type="CharacterBody2D" unique_id=1428041276]
+[ext_resource type="Script" uid="uid://byqult3lnckml" path="res://src/scripts/player/Wizard.cs" id="1_i3aa6"]
+[ext_resource type="Texture2D" uid="uid://c1divw4agfb41" path="res://src/assets/temporary_wizard.png" id="2_b8hmv"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1470571424]
+[node name="Wizard" type="Node2D" unique_id=221284188]
+script = ExtResource("1_i3aa6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1920189667]
-
-[node name="Node" type="Node" parent="." unique_id=1133412325]
+position = Vector2(34.000008, 43.000008)
+scale = Vector2(0.206, 0.2)
+texture = ExtResource("2_b8hmv")
 
 [node name="NameLabel" type="Label" parent="." unique_id=200422044]
 offset_right = 40.0
