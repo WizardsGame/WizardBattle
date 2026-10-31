@@ -3,8 +3,11 @@
 [ext_resource type="TileSet" uid="uid://dccyb3ivejq8s" path="res://src/assets/floor_tile/tile_map/floor_rock.tres" id="1_rfa1d"]
 [ext_resource type="Script" uid="uid://b8c11eovkvxf0" path="res://src/scripts/maps/MapView.cs" id="1_vklj7"]
 [ext_resource type="TileSet" uid="uid://bkmh84mhy0hhg" path="res://src/assets/wall_tile/tile_map/wall.tres" id="2_dmjg0"]
+[ext_resource type="Script" uid="uid://b3rbvxa8pa6v2" path="res://src/scripts/game/Match.cs" id="4_match"]
 
-[node name="Match" type="Node2D" unique_id=1689643679]
+[node name="Match" type="Node2D" unique_id=1689643679 node_paths=PackedStringArray("World")]
+script = ExtResource("4_match")
+World = NodePath("World")
 
 [node name="World" type="Node2D" parent="." unique_id=1162102265 node_paths=PackedStringArray("Ground", "Obstacles")]
 script = ExtResource("1_vklj7")
