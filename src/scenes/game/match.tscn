@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b8c11eovkvxf0" path="res://src/scripts/maps/MapView.cs" id="1_vklj7"]
 [ext_resource type="TileSet" uid="uid://bkmh84mhy0hhg" path="res://src/assets/wall_tile/tile_map/wall.tres" id="2_dmjg0"]
 [ext_resource type="Script" uid="uid://b3rbvxa8pa6v2" path="res://src/scripts/game/Match.cs" id="4_match"]
+[ext_resource type="PackedScene" uid="uid://ywbnf735j4aj" path="res://src/scenes/game/wizard.tscn" id="5_7juhy"]
 
 [node name="Match" type="Node2D" unique_id=1689643679 node_paths=PackedStringArray("World")]
 script = ExtResource("4_match")
@@ -24,10 +25,10 @@ tile_map_data = PackedByteArray("AAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAA
 tile_set = ExtResource("2_dmjg0")
 
 [node name="Pickups" type="Node2D" parent="World" unique_id=558650903]
-position = Vector2(40, -24)
 
 [node name="Wizards" type="Node2D" parent="World" unique_id=196619447]
-position = Vector2(88, -24)
+
+[node name="Wizard" parent="World/Wizards" unique_id=221284188 instance=ExtResource("5_7juhy")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=269317906]
 
