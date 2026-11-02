@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ywbnf735j4aj"]
 
-[ext_resource type="Script" uid="uid://byqult3lnckml" path="res://src/scripts/player/Wizard.cs" id="1_i3aa6"]
+[ext_resource type="Script" uid="uid://byqult3lnckml" path="res://src/scripts/game/Wizard.cs" id="1_i3aa6"]
 [ext_resource type="Texture2D" uid="uid://c1divw4agfb41" path="res://src/assets/temporary_wizard.png" id="2_b8hmv"]
 
 [node name="Wizard" type="Node2D" unique_id=221284188]

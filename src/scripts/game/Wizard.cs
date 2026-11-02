@@ -5,8 +5,9 @@ public partial class Wizard : Node2D
 {
 	[Export] public int speedTile = 5;
 	[Export] public int health = 100;
-	[Export] public Label _nameLabel;
+	public Label _nameLabel;
     public Vector2I curPosition;
+    
 
 
     private bool _isMoving = true;
