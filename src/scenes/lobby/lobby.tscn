@@ -48,7 +48,7 @@ text = "Добавить слово"
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 
 [node name="WordsScroll" type="ScrollContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin" unique_id=649600876]
@@ -65,7 +65,7 @@ theme_override_constants/margin_right = 10
 [node name="WordsVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin" unique_id=61637394]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
 [node name="DemoWord1" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=1573909889 instance=ExtResource("1_260xa")]
 layout_mode = 2
@@ -109,12 +109,12 @@ layout_mode = 2
 [node name="ButtonsMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1988133825]
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 5
 
 [node name="ButtonsHBox" type="HBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin" unique_id=288870108]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 10
 
