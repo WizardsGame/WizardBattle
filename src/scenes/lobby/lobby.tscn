@@ -16,10 +16,10 @@ grow_vertical = 2
 
 [node name="RootMargin" type="MarginContainer" parent="RootPanel" unique_id=819143902]
 layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
 [node name="MenuPanel" type="PanelContainer" parent="RootPanel/RootMargin" unique_id=1963935464]
 layout_mode = 2
@@ -27,6 +27,22 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_we06s")
 
 [node name="MenuVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel" unique_id=118649321]
 layout_mode = 2
+
+[node name="ScreenTitleLabel" type="Label" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=900908292]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Заполнение слов и предложений"
+horizontal_alignment = 1
+
+[node name="WordAddButtonMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1074726765]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="WordAddButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordAddButtonMargin" unique_id=852880388]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Добавить слово"
 
 [node name="WordsMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=2020875334]
 layout_mode = 2
