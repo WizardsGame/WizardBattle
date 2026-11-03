@@ -40,30 +40,54 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="WordsVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll" unique_id=61637394]
+[node name="WordsScrollMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll" unique_id=355491254]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 10
+
+[node name="WordsVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin" unique_id=61637394]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="LobbyWordItem" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=1271212779 instance=ExtResource("1_260xa")]
+[node name="LobbyWordItem" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=1271212779 instance=ExtResource("1_260xa")]
 layout_mode = 2
 
-[node name="LobbyWordItem2" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=1176061505 instance=ExtResource("1_260xa")]
+[node name="LobbyWordItem2" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=1176061505 instance=ExtResource("1_260xa")]
 layout_mode = 2
 
-[node name="LobbyWordItem3" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=706463068 instance=ExtResource("1_260xa")]
+[node name="LobbyWordItem3" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=706463068 instance=ExtResource("1_260xa")]
 layout_mode = 2
 
-[node name="LobbyWordItem4" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=1792317839 instance=ExtResource("1_260xa")]
+[node name="LobbyWordItem4" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=1792317839 instance=ExtResource("1_260xa")]
 layout_mode = 2
 
-[node name="LobbyWordItem5" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=2009184966 instance=ExtResource("1_260xa")]
+[node name="LobbyWordItem5" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=2009184966 instance=ExtResource("1_260xa")]
 layout_mode = 2
 
-[node name="LobbyWordItem6" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=273955750 instance=ExtResource("1_260xa")]
+[node name="LobbyWordItem6" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=273955750 instance=ExtResource("1_260xa")]
 layout_mode = 2
 
-[node name="LobbyWordItem7" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=943978226 instance=ExtResource("1_260xa")]
+[node name="LobbyWordItem7" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=943978226 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem8" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=1573909889 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem9" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=179514619 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem10" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=620753222 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem11" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=238978051 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem12" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=1241088999 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem13" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox" unique_id=1894059942 instance=ExtResource("1_260xa")]
 layout_mode = 2
 
 [node name="ButtonsMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1988133825]
