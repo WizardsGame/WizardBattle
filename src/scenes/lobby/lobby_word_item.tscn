@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dpmq4xpcxs8ns"]
 
+[ext_resource type="PackedScene" uid="uid://pvk5aah21gdb" path="res://src/scenes/lobby/lobby_word_sentence.tscn" id="1_vcodj"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -21,8 +23,40 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="WordLabel" type="Label" parent="ItemMargin" unique_id=2080693204]
+[node name="ItemVBox" type="VBoxContainer" parent="ItemMargin" unique_id=1299181040]
 layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderHBox" type="HBoxContainer" parent="ItemMargin/ItemVBox" unique_id=1945301138]
+layout_mode = 2
+
+[node name="WordLabel" type="Label" parent="ItemMargin/ItemVBox/HeaderHBox" unique_id=2080693204]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "Слово"
+
+[node name="WordRemoveButton" type="Button" parent="ItemMargin/ItemVBox/HeaderHBox" unique_id=1564662749]
+layout_mode = 2
+tooltip_text = "Удалить слово"
+text = "X"
+
+[node name="SentencesVBox" type="VBoxContainer" parent="ItemMargin/ItemVBox" unique_id=321199056]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DemoSentence1" parent="ItemMargin/ItemVBox/SentencesVBox" unique_id=1801378445 instance=ExtResource("1_vcodj")]
+layout_mode = 2
+
+[node name="DemoSentence2" parent="ItemMargin/ItemVBox/SentencesVBox" unique_id=316420467 instance=ExtResource("1_vcodj")]
+layout_mode = 2
+
+[node name="DemoSentence3" parent="ItemMargin/ItemVBox/SentencesVBox" unique_id=1791470252 instance=ExtResource("1_vcodj")]
+layout_mode = 2
+
+[node name="AddSentenceButton" type="Button" parent="ItemMargin/ItemVBox" unique_id=1402588044]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Добавить предложение"

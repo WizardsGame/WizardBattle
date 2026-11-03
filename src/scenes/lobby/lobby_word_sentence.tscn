@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://pvk5aah21gdb"]
+
+[node name="LobbyWordSentence" type="PanelContainer" unique_id=1935263752]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="SentenceMargin" type="MarginContainer" parent="." unique_id=592150265]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="SentenceHBox" type="HBoxContainer" parent="SentenceMargin" unique_id=1552016217]
+layout_mode = 2
+
+[node name="SentenceLabel" type="Label" parent="SentenceMargin/SentenceHBox" unique_id=12681970]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Это предложение."
+
+[node name="SentenceRemoveButton" type="Button" parent="SentenceMargin/SentenceHBox" unique_id=367799807]
+layout_mode = 2
+tooltip_text = "Удалить предложение"
+text = "X"
