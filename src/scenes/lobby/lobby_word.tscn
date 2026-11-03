@@ -8,7 +8,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="LobbyWordItem" type="PanelContainer" unique_id=1573909889]
+[node name="LobbyWord" type="PanelContainer" unique_id=1573909889]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

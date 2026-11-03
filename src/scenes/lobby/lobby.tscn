@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c87yj1hlm3o5l"]
 
-[ext_resource type="PackedScene" uid="uid://dpmq4xpcxs8ns" path="res://src/scenes/lobby/lobby_word_item.tscn" id="1_260xa"]
+[ext_resource type="PackedScene" uid="uid://dpmq4xpcxs8ns" path="res://src/scenes/lobby/lobby_word.tscn" id="1_260xa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
 bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
