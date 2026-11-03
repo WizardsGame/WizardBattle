@@ -1,7 +1,91 @@
 [gd_scene format=3 uid="uid://c87yj1hlm3o5l"]
 
-[node name="Lobby" type="Control" unique_id=2056619820]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[ext_resource type="PackedScene" uid="uid://dpmq4xpcxs8ns" path="res://src/scenes/lobby/lobby_word_item.tscn" id="1_260xa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
+bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=197823937]
+
+[node name="RootPanel" type="PanelContainer" parent="." unique_id=1283443499]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RootMargin" type="MarginContainer" parent="RootPanel" unique_id=819143902]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="MenuPanel" type="PanelContainer" parent="RootPanel/RootMargin" unique_id=1963935464]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_we06s")
+
+[node name="MenuVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel" unique_id=118649321]
+layout_mode = 2
+
+[node name="WordsMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=2020875334]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="WordsScroll" type="ScrollContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin" unique_id=649600876]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="WordsVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll" unique_id=61637394]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="LobbyWordItem" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=1271212779 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem2" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=1176061505 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem3" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=706463068 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem4" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=1792317839 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem5" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=2009184966 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem6" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=273955750 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="LobbyWordItem7" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsVBox" unique_id=943978226 instance=ExtResource("1_260xa")]
+layout_mode = 2
+
+[node name="ButtonsMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1988133825]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin" unique_id=288870108]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SaveToFileButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=1614659787]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Сохранить в файл"
+
+[node name="ContinueButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=506186421]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Далее"

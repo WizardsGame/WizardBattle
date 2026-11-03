@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dpmq4xpcxs8ns"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="LobbyWordItem" type="PanelContainer" unique_id=1573909889]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_we06s")
+
+[node name="ItemMargin" type="MarginContainer" parent="." unique_id=931175958]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="WordLabel" type="Label" parent="ItemMargin" unique_id=2080693204]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Слово"
