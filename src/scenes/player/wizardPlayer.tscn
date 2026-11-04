@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://5k5l45s2l75e"]
+
+[ext_resource type="Script" uid="uid://dqf242f8eynvx" path="res://src/scripts/player/WizardPlayer.cs" id="1_i2q1l"]
+[ext_resource type="Texture2D" uid="uid://c1divw4agfb41" path="res://src/assets/temporary_wizard.png" id="2_okkt1"]
+
+[node name="WizardPlayer" type="Node2D" unique_id=221284188]
+script = ExtResource("1_i2q1l")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1920189667]
+scale = Vector2(0.206, 0.2)
+texture = ExtResource("2_okkt1")
+
+[node name="NameLabel" type="Label" parent="." unique_id=200422044]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="SelectionIndicator" type="Sprite2D" parent="." unique_id=1620565146]

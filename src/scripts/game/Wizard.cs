@@ -1,27 +1,34 @@
 using Godot;
 using System;
 
+namespace WizardBattle.Game;
+
 public partial class Wizard : Node2D
 {
 	[Export] public int speedTile = 5;
 	[Export] public int health = 100;
-	public Label _nameLabel;
-    public Vector2I curPosition;
-    
+	private Label _nameLabel;
+    private Vector2I _posInCells;
 
-
-    private bool _isMoving = true;
-    
-    public override void _Ready()
-    {
-
+    public Vector2I CurPosition { 
+        get => _posInCells;
     }
 
-    public void PlaceOnCell(Vector2I cellPos, TileMapLayer groundLayer)
+    public Wizard()
     {
-        curPosition = cellPos;
+        _posInCells = new Vector2I(1, 1);
+    }
+
+    public Wizard(Vector2I startingPosInCells)
+    {
+        _posInCells = startingPosInCells;
+    }
+
+    public void PlaceOnCell(Vector2I targetCell, TileMapLayer groundLayer)
+    {
+        _posInCells = targetCell;
         // MapToLocal переводит координаты тайлпапа в локальные координаты позиции node
-        Position = groundLayer.MapToLocal(cellPos);
-        GD.Print($"Position {curPosition.X}, {curPosition.Y}");
+        Position = groundLayer.MapToLocal(targetCell);
+        GD.Print($"Position {_posInCells.X}, {_posInCells.Y}");
     }
 }

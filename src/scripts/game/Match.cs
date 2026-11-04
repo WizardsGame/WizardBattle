@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 using WizardBattle.Maps;
+using WizardBattle.Player;
 
 namespace WizardBattle.Game;
 
@@ -34,8 +35,12 @@ public partial class Match : Node2D
 
     //------пока я спавню только одного мага, прямо в match--------
     //TODO: надо будет сделать отдельный спавнер 
-    private Wizard _selectedWizard;
-    private List<Wizard> _wizards = new();
+
+    private WizardPlayer _wizardPlayer; // сам игрок (singleton)
+    private List<Wizard> _wizards = new(); // другие игроки
+    private WizardPlayer _selectedWizard; 
+
+    //-------------------------------------------------------------
 
     public override void _Ready()
     {
@@ -75,6 +80,12 @@ public partial class Match : Node2D
             Vector2 globalMousePos = GetGlobalMousePosition();
             Vector2 localPos = World.Ground.ToLocal(globalMousePos);
             Vector2I clickedCell = World.Ground.LocalToMap(localPos);
+            if (clickedCell.X < 0 || clickedCell.Y < 0 || 
+                clickedCell.X >= CurrentMap.Width || clickedCell.Y >= CurrentMap.Height)
+            {
+                throw new InvalidOperationException("Нажатие вне поля");
+            }
+
             GD.Print($"Клик по клетке: X = {clickedCell.X}, Y = {clickedCell.Y}");
 
             if (mouseButton.ButtonIndex == MouseButton.Left)
@@ -82,7 +93,7 @@ public partial class Match : Node2D
                 HandleLeftMouseClick(clickedCell);
             }
 
-            if (mouseButton.ButtonIndex == MouseButton.Right)
+            else if (mouseButton.ButtonIndex == MouseButton.Right)
             {
                 HandleRightMouseClick(clickedCell);
             }
@@ -94,17 +105,23 @@ public partial class Match : Node2D
         switch (_inputMode)
         {
             case InputMode.Default:
-                Wizard clickedWizard = _wizards.Find(w => w.curPosition == clickedCell);
-                if(clickedWizard == null) break;
-                _selectedWizard = clickedWizard;
+                //Wizard clickedWizard = _wizards.Find(w => w.curPosition == clickedCell);
+                if(clickedCell != _wizardPlayer.CurPosition) break;
+                _selectedWizard = _wizardPlayer;
                 _inputMode = InputMode.WizardPlayerSelected;
-                GD.Print($"Выбран игрок {_selectedWizard.curPosition}");
+                var reachable = _wizardPlayer.CalculateReachableCells(CurrentMap, _wizards);
+                World.ShowHighlight(reachable);
+                GD.Print($"Выбран игрок {_selectedWizard.CurPosition}");
                 break;
 
             case InputMode.WizardPlayerSelected:
+                List<Vector2I> path = _wizardPlayer.GetPathTo(clickedCell);
                 _selectedWizard.PlaceOnCell(clickedCell, World.Ground);
-                _selectedWizard = null;
+                GD.Print($"Построен путь длиной в {path.Count} шагов. Конечная цель: {clickedCell}");
+
+                World.Highlight?.Clear();
                 _inputMode = InputMode.Default;
+                _selectedWizard = null;
                 break;
         }
     }
@@ -112,10 +129,13 @@ public partial class Match : Node2D
     private void HandleRightMouseClick(Vector2I clickedCell)
     {
         VirtualCell cellData = CurrentMap.Cells[clickedCell.X, clickedCell.Y];
+        _inputMode = InputMode.Default;
         GD.Print($"Клетка {cellData.GetType().Name}");
     }
 
-    // Собираем всех магов из узла World/Wizards
+    //----------------------------Временно--------------------------------------------
+    // Сейчас мы собираем всех ЗАРАНЕЕ вручную созданных магов из узла World/Wizards
+    // TODO: Сделать спавнер, который будет создавать одного WizardPlayer и много Wizard
     private void LoadWizards()
     {
         Node2D wizardsParent = GetNodeOrNull<Node2D>("World/Wizards");
@@ -125,10 +145,22 @@ public partial class Match : Node2D
 
         for (int i = 0; i < wizardsParent.GetChildCount(); i++)
         {
-            if (wizardsParent.GetChild(i) is Wizard curWizard)
+            var child = wizardsParent.GetChild(i);
+            if (child is Wizard curWizard)
             {
                 _wizards.Add(curWizard);
+            } 
+            else if (child is WizardPlayer wizardPlayer)
+            {
+                _wizardPlayer = wizardPlayer;
+                _wizardPlayer.PlaceOnCell(new Vector2I(1, 1), World.Ground);
             }
+        }
+
+        // Страховка на случай, если синглтон инициализировался раньше через Instance
+        if (_wizardPlayer == null)
+        {
+            _wizardPlayer = WizardPlayer.Instance;
         }
     }
 }
