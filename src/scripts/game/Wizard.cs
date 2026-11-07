@@ -10,18 +10,9 @@ public partial class Wizard : Node2D
 	private Label _nameLabel;
     private Vector2I _posInCells;
 
+    //для set вызывайте PlaceOnCell
     public Vector2I CurPosition { 
         get => _posInCells;
-    }
-
-    public Wizard()
-    {
-        _posInCells = new Vector2I(1, 1);
-    }
-
-    public Wizard(Vector2I startingPosInCells)
-    {
-        _posInCells = startingPosInCells;
     }
 
     public void PlaceOnCell(Vector2I targetCell, TileMapLayer groundLayer)
@@ -29,6 +20,6 @@ public partial class Wizard : Node2D
         _posInCells = targetCell;
         // MapToLocal переводит координаты тайлпапа в локальные координаты позиции node
         Position = groundLayer.MapToLocal(targetCell);
-        GD.Print($"Position {_posInCells.X}, {_posInCells.Y}");
+        GD.Print($"Position {CurPosition.X}, {CurPosition.Y}");
     }
 }

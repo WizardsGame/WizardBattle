@@ -1,4 +1,5 @@
 using System;
+using Godot;
 
 namespace WizardBattle.Maps;
 
@@ -27,5 +28,11 @@ public class MapData
 
         Id = id;
         Cells = cells;
+    }
+
+    public bool IsWithinBoundary(Vector2I curPosInCells)
+    {
+        return curPosInCells.X >= 0 && curPosInCells.Y >= 0 
+        && curPosInCells.X < Width && curPosInCells.Y < Height;
     }
 }

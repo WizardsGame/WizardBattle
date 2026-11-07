@@ -38,7 +38,7 @@ public partial class Match : Node2D
 
     private WizardPlayer _wizardPlayer; // сам игрок (singleton)
     private List<Wizard> _wizards = new(); // другие игроки
-    private WizardPlayer _selectedWizard; 
+    private WizardPlayer _selectedWizard;
 
     //-------------------------------------------------------------
 
@@ -80,7 +80,8 @@ public partial class Match : Node2D
             Vector2 globalMousePos = GetGlobalMousePosition();
             Vector2 localPos = World.Ground.ToLocal(globalMousePos);
             Vector2I clickedCell = World.Ground.LocalToMap(localPos);
-            if (clickedCell.X < 0 || clickedCell.Y < 0 || 
+
+            if (clickedCell.X < 0 || clickedCell.Y < 0 ||
                 clickedCell.X >= CurrentMap.Width || clickedCell.Y >= CurrentMap.Height)
             {
                 throw new InvalidOperationException("Нажатие вне поля");
@@ -106,7 +107,7 @@ public partial class Match : Node2D
         {
             case InputMode.Default:
                 //Wizard clickedWizard = _wizards.Find(w => w.curPosition == clickedCell);
-                if(clickedCell != _wizardPlayer.CurPosition) break;
+                if (clickedCell != _wizardPlayer.CurPosition) break;
                 _selectedWizard = _wizardPlayer;
                 _inputMode = InputMode.WizardPlayerSelected;
                 var reachable = _wizardPlayer.CalculateReachableCells(CurrentMap, _wizards);
@@ -116,8 +117,29 @@ public partial class Match : Node2D
 
             case InputMode.WizardPlayerSelected:
                 List<Vector2I> path = _wizardPlayer.GetPathTo(clickedCell);
+
+                var reachableCells = _wizardPlayer.CalculateReachableCells(CurrentMap, _wizards);
+                if (_wizardPlayer.CurPosition == clickedCell 
+                || !reachableCells.ContainsKey(clickedCell)
+                || _wizards.Exists(w => w.CurPosition == clickedCell))
+                {
+                    GD.Print("Выделение снято");
+                    World.Highlight?.Clear();
+                    _inputMode = InputMode.Default;
+                    _selectedWizard = null;
+                    break;
+                }
+
                 _selectedWizard.PlaceOnCell(clickedCell, World.Ground);
+                foreach(var pos in reachableCells)
+                {
+                    GD.Print(pos);
+                }
                 GD.Print($"Построен путь длиной в {path.Count} шагов. Конечная цель: {clickedCell}");
+                foreach(var pos in path)
+                {
+                    GD.Print($"({pos})->");
+                }
 
                 World.Highlight?.Clear();
                 _inputMode = InputMode.Default;
@@ -138,29 +160,30 @@ public partial class Match : Node2D
     // TODO: Сделать спавнер, который будет создавать одного WizardPlayer и много Wizard
     private void LoadWizards()
     {
-        Node2D wizardsParent = GetNodeOrNull<Node2D>("World/Wizards");
+        if (WizardPlayer.Instance == null)
+        {
+            GD.PrintErr("На сцене не найден WizardPlayer! Убедитесь, что узел добавлен");
+            return;
+        }
+        // Локального игрока берем напрямую через синглтон
+        _wizardPlayer = WizardPlayer.Instance;
+        _wizardPlayer.PlaceOnCell(new Vector2I(1, 1), World.Ground);
+
+        // В цикле собираем ТОЛЬКО остальных игроков
+        var wizardsParent = GetNodeOrNull<Node>("World/Wizards");
         if (wizardsParent == null) return;
 
         _wizards.Clear();
-
-        for (int i = 0; i < wizardsParent.GetChildCount(); i++)
+        int childCount = wizardsParent.GetChildCount();
+        for (int i = 0; i < childCount; i++)
         {
             var child = wizardsParent.GetChild(i);
-            if (child is Wizard curWizard)
-            {
-                _wizards.Add(curWizard);
-            } 
-            else if (child is WizardPlayer wizardPlayer)
-            {
-                _wizardPlayer = wizardPlayer;
-                _wizardPlayer.PlaceOnCell(new Vector2I(1, 1), World.Ground);
-            }
-        }
 
-        // Страховка на случай, если синглтон инициализировался раньше через Instance
-        if (_wizardPlayer == null)
-        {
-            _wizardPlayer = WizardPlayer.Instance;
+            // Добавляем ноду, если это маг, но НЕ наш локальный игрок
+            if (child is Wizard wizard && wizard != _wizardPlayer)
+            {
+                _wizards.Add(wizard);
+            }
         }
     }
 }

@@ -38,6 +38,7 @@ public partial class WizardPlayer : Wizard
     // Алгоритм Дейкстры для расчета доступных клеток с учетом SpeedCost и Weight.
     public Dictionary<Vector2I, int> CalculateReachableCells(MapData map, List<Wizard> otherWizards)
     {
+        GD.Print($"дальность {speedTile}");
         _reachableCells.Clear();
         _cameFrom.Clear();
 
@@ -75,9 +76,7 @@ public partial class WizardPlayer : Wizard
             {
                 var neighborPos = current.Pos + dir;
 
-                if (neighborPos.X < 0 || neighborPos.Y < 0 || 
-                    neighborPos.X >= map.Width || neighborPos.Y >= map.Height)
-                    continue;
+                if (!map.IsWithinBoundary(neighborPos)) continue;
 
                 var cell = map.Cells[neighborPos.X, neighborPos.Y];
 
