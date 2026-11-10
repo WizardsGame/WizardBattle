@@ -5,7 +5,7 @@ public partial class LobbyCreating : Control
 {
 	
 	[Export] public string CrossScenePath = "res://src/scenes/main/main.tscn";
-	[Export] public string NextScenePath = "тут должен быть путь на следующее что-то";
+	[Export] public string NextScenePath = "res://src/scenes/lobby/lobby.tscn";
 	
 	public override void _Ready()
 	{
