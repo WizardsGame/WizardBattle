@@ -9,8 +9,7 @@ public partial class LobbyCreating : Control
 	
 	public override void _Ready()
 	{
-		var SaveButton = GetNode<Button>("VBoxContainer/HBoxContainer/SaveButton");
-		var NextButton = GetNode<Button>("VBoxContainer/HBoxContainer/NextButton");
+		var NextButton = GetNode<Button>("VBoxContainer/NextButton");
 		var CrossButton = GetNode<Button>("CrossButton");
 		
 		SaveButton.Pressed += OnSaveButtonPressed;
@@ -18,11 +17,6 @@ public partial class LobbyCreating : Control
 		CrossButton.Pressed += OnCrossButtonPressed;
 	}
 
-	private void OnSaveButtonPressed()
-	{
-		//ToDo: сохранить и другие настройки
-	}
-	
 	private void OnNextButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Переход на следущую сцену");

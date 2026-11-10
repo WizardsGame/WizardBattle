@@ -1,13 +1,15 @@
-[gd_scene format=3 uid="uid://ody5b332ux3x"]
+[gd_scene format=3 uid="uid://de0ladrmh8ds3"]
 
 [ext_resource type="Script" uid="uid://d8n5islmogv3" path="res://src/scripts/lobby/LobbyCreating.cs" id="1_xwifx"]
-[ext_resource type="Texture2D" uid="uid://sh7exwtc4b7a" path="res://src/assets/cross.svg" id="2_xwifx"]
+[ext_resource type="Texture2D" uid="uid://pfxe870f2ovy" path="res://src/assets/cross.svg" id="2_xwifx"]
 
 [node name="LobbyCreating" type="Control" unique_id=61421610]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 11.0
+offset_right = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0033222)
@@ -35,24 +37,13 @@ text = "Настройка лобби"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1466797447]
+[node name="NextButton" type="Button" parent="VBoxContainer" unique_id=1707774321]
+custom_minimum_size = Vector2(600, 60)
 layout_mode = 2
-
-[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1923847941]
-custom_minimum_size = Vector2(310, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Сохранить"
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=284732248]
-custom_minimum_size = Vector2(80, 60)
-layout_mode = 2
-
-[node name="NextButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1707774321]
-custom_minimum_size = Vector2(310, 60)
-layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 text = "Далее"
+icon_alignment = 1
 
 [node name="CrossButton" type="Button" parent="." unique_id=401043237]
 custom_minimum_size = Vector2(100, 100)
