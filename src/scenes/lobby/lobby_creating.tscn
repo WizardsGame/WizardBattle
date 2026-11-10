@@ -1,51 +1,60 @@
 [gd_scene format=3 uid="uid://ody5b332ux3x"]
 
-[ext_resource type="Script" uid="uid://dpkyheygdg7uf" path="res://src/scripts/lobby/LobbyConnecting.cs" id="2_t1xeu"]
+[ext_resource type="Script" uid="uid://d8n5islmogv3" path="res://src/scripts/lobby/LobbyCreating.cs" id="1_xwifx"]
 [ext_resource type="Texture2D" uid="uid://sh7exwtc4b7a" path="res://src/assets/cross.svg" id="2_xwifx"]
 
-[node name="LobbyConnecting" type="Control" unique_id=1028658947]
+[node name="LobbyCreating" type="Control" unique_id=61421610]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_t1xeu")
+scale = Vector2(1, 1.0033222)
+script = ExtResource("1_xwifx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1882036481]
-custom_minimum_size = Vector2(310, 200)
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=412091298]
+custom_minimum_size = Vector2(700, 200)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -96.0
-offset_right = 192.0
-offset_bottom = 96.0
+offset_left = -354.0
+offset_top = -100.0
+offset_right = 354.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="RichTextLabel" parent="VBoxContainer" unique_id=1694156002]
+[node name="Title" type="RichTextLabel" parent="VBoxContainer" unique_id=843563255]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 35
-text = "Подключение к лобби"
+theme_override_font_sizes/normal_font_size = 65
+text = "Настройка лобби"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="RoomIDLineEdit" type="LineEdit" parent="VBoxContainer" unique_id=1851118006]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1466797447]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1923847941]
+custom_minimum_size = Vector2(310, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
-placeholder_text = "Введите UID лобби"
-max_length = 255
+text = "Сохранить"
 
-[node name="ConnectingLobbyButton" type="Button" parent="VBoxContainer" unique_id=1605661734]
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=284732248]
+custom_minimum_size = Vector2(80, 60)
+layout_mode = 2
+
+[node name="NextButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1707774321]
+custom_minimum_size = Vector2(310, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
-text = "Подключиться к лобби"
+text = "Далее"
 
-[node name="CrossButton" type="Button" parent="." unique_id=1389120584]
+[node name="CrossButton" type="Button" parent="." unique_id=401043237]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 1

@@ -35,7 +35,6 @@ public partial class MainMenu : Control
 
 	private void OnCreateLobbyButtonPressed()
 	{
-		//TODO: Создать сцену создания лобби и реализовать переход на неё здесь
 		GD.Print("Нажата кнопка: Создать комнату");
 		
 		if (ResourceLoader.Exists(CreateLobbyScenePath))
