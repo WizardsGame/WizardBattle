@@ -3,7 +3,7 @@ using Godot;
 public partial class MainMenu : Control
 {
 	[Export] public string JoinLobbyScenePath = "res://src/scenes/lobby/lobby_connecting.tscn";
-	[Export] public string CreateLobbyScenePath = "res://src/scenes/lobby/lobby_creating.tscn";
+	[Export] public string CreateLobbyScenePath = "res://src/scenes/lobby/lobby.tscn";
 	[Export] public string SettingsScenePath = "тут должен быть путь на настройки";
 
 	public override void _Ready()
