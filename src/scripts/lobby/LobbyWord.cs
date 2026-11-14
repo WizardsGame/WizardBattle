@@ -29,7 +29,6 @@ public partial class LobbyWord : PanelContainer
 	{
 		GD.Print("Нажата кнопка: Добавить предложение");
 		
-		//Создаем экземпляр сцены предложения
 		Node sentenceInstance = _sentenceScene.Instantiate();
 		Label sentenceLabel = sentenceInstance.GetNodeOrNull<Label>("SentenceMargin/SentenceHBox/SentenceLabel");
 		

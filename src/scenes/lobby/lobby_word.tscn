@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dpmq4xpcxs8ns"]
 
 [ext_resource type="Script" uid="uid://c6oh3wyhwu8qh" path="res://src/scripts/lobby/LobbyWord.cs" id="1_2a7pk"]
-[ext_resource type="PackedScene" uid="uid://pvk5aah21gdb" path="res://src/scenes/lobby/lobby_word_sentence.tscn" id="1_vcodj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
 corner_radius_top_left = 20
@@ -48,15 +47,6 @@ text = "X"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="DemoSentence1" parent="ItemMargin/ItemVBox/SentencesVBox" unique_id=1801378445 instance=ExtResource("1_vcodj")]
-layout_mode = 2
-
-[node name="DemoSentence2" parent="ItemMargin/ItemVBox/SentencesVBox" unique_id=316420467 instance=ExtResource("1_vcodj")]
-layout_mode = 2
-
-[node name="DemoSentence3" parent="ItemMargin/ItemVBox/SentencesVBox" unique_id=1791470252 instance=ExtResource("1_vcodj")]
-layout_mode = 2
 
 [node name="AddSentenceButton" type="Button" parent="ItemMargin/ItemVBox" unique_id=1402588044]
 layout_mode = 2
