@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://c87yj1hlm3o5l"]
 
 [ext_resource type="PackedScene" uid="uid://dpmq4xpcxs8ns" path="res://src/scenes/lobby/lobby_word.tscn" id="1_260xa"]
+[ext_resource type="Script" uid="uid://cyekifba5048q" path="res://src/scenes/lobby/Lobby.cs" id="1_k6g8w"]
+[ext_resource type="Texture2D" uid="uid://pfxe870f2ovy" path="res://src/assets/cross.svg" id="3_1jq6v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
 bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=197823937]
+script = ExtResource("1_k6g8w")
 
 [node name="RootPanel" type="PanelContainer" parent="." unique_id=1283443499]
 anchors_preset = 15
@@ -129,3 +132,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Далее"
+
+[node name="CrossButton" type="Button" parent="." unique_id=1384865671]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 100.0
+grow_horizontal = 0
+icon = ExtResource("3_1jq6v")
+flat = true
+icon_alignment = 1
+expand_icon = true
