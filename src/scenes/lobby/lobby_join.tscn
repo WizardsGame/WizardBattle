@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://xyb6rt3fvw6r"]
+
+[ext_resource type="Script" uid="uid://dpkyheygdg7uf" path="res://src/scripts/lobby/LobbyJoin.cs" id="1_ln78i"]
+[ext_resource type="Texture2D" uid="uid://pfxe870f2ovy" path="res://src/assets/cross.svg" id="2_af3qs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ln78i"]
+bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
+
+[node name="LobbyJoin" type="CanvasLayer" unique_id=847734361]
+script = ExtResource("1_ln78i")
+
+[node name="RootPanel" type="PanelContainer" parent="." unique_id=1658323409]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RootMargin" type="MarginContainer" parent="RootPanel" unique_id=1868859121]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="MenuPanel" type="PanelContainer" parent="RootPanel/RootMargin" unique_id=1634627829]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ln78i")
+
+[node name="MenuMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel" unique_id=2128020834]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuMargin" unique_id=1882036481]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="Title" type="RichTextLabel" parent="RootPanel/RootMargin/MenuPanel/MenuMargin/VBoxContainer" unique_id=1694156002]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 35
+text = "Подключение к лобби"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="RoomIDLineEdit" type="LineEdit" parent="RootPanel/RootMargin/MenuPanel/MenuMargin/VBoxContainer" unique_id=1851118006]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+placeholder_text = "Введите UID лобби"
+max_length = 255
+
+[node name="JoinLobbyButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuMargin/VBoxContainer" unique_id=1605661734]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Подключиться к лобби"
+
+[node name="BackButton" type="Button" parent="RootPanel/RootMargin/MenuPanel" unique_id=1389120584]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("2_af3qs")
+flat = true
+icon_alignment = 1
+expand_icon = true

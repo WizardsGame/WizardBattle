@@ -30,17 +30,38 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_we06s")
 [node name="MenuVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel" unique_id=118649321]
 layout_mode = 2
 
-[node name="ScreenTitleLabel" type="Label" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=900908292]
+[node name="Control" type="Control" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=834037624]
 layout_mode = 2
+
+[node name="ScreenTitleLabel" type="Label" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/Control" unique_id=900908292]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 text = "Заполнение слов и предложений"
 horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1384865671]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("3_1jq6v")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="WordAddButtonMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1074726765]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 
 [node name="WordAddButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordAddButtonMargin" unique_id=852880388]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 20
@@ -65,6 +86,7 @@ size_flags_vertical = 3
 theme_override_constants/margin_right = 10
 
 [node name="WordsVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin" unique_id=61637394]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
@@ -82,26 +104,23 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="SaveToFileButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=1614659787]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Сохранить в файл"
 
-[node name="ContinueButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=506186421]
+[node name="LoadFromFileButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=1193958087]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
-text = "Далее"
+text = "Загрузить из файла"
 
-[node name="CrossButton" type="Button" parent="." unique_id=1384865671]
-custom_minimum_size = Vector2(100, 100)
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 100.0
-grow_horizontal = 0
-icon = ExtResource("3_1jq6v")
-flat = true
-icon_alignment = 1
-expand_icon = true
+[node name="ContinueButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=506186421]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 24
+text = "Далее"

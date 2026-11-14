@@ -10,27 +10,27 @@ public partial class LobbyWord : PanelContainer
 	public override void _Ready()
 	{
 		//подгружаю заранее
-		 _sentencesVBox = GetNode<VBoxContainer>("ItemMargin/ItemVBox/SentencesVBox");
+		 _sentencesVBox = GetNode<VBoxContainer>("%SentencesVBox");
 		
-		var WordRemoveButton = GetNode<Button>("ItemMargin/ItemVBox/HeaderHBox/WordRemoveButton");
-		var AddSentenceButton = GetNode<Button>("ItemMargin/ItemVBox/AddSentenceButton");
+		var wordRemoveButton = GetNode<Button>("%WordRemoveButton");
+		var addSentenceButton = GetNode<Button>("%AddSentenceButton");
 		
-		WordRemoveButton.Pressed += WordRemoveButtonPressed;
-		AddSentenceButton.Pressed += AddSentenceButtonPressed;
+		wordRemoveButton.Pressed += OnWordRemoveButtonPressed;
+		addSentenceButton.Pressed += OnAddSentenceButtonPressed;
 	}
 	
-	private void WordRemoveButtonPressed()
+	private void OnWordRemoveButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Удалить слово");
 		QueueFree();
 	}
 	
-	private void AddSentenceButtonPressed()
+	private void OnAddSentenceButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Добавить предложение");
 		
 		Node sentenceInstance = _sentenceScene.Instantiate();
-		Label sentenceLabel = sentenceInstance.GetNodeOrNull<Label>("SentenceMargin/SentenceHBox/SentenceLabel");
+		Label sentenceLabel = sentenceInstance.GetNodeOrNull<Label>("%SentenceLabel");
 		
 		if (sentenceLabel != null)
 		{

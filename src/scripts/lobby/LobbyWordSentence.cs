@@ -5,12 +5,12 @@ public partial class LobbyWordSentence : PanelContainer
 {
 	public override void _Ready()
 	{
-		var SentenceRemoveButton = GetNode<Button>("SentenceMargin/SentenceHBox/SentenceRemoveButton");
+		var sentenceRemoveButton = GetNode<Button>("%SentenceRemoveButton");
 		
-		SentenceRemoveButton.Pressed += SentenceRemoveButtonPressed;
+		sentenceRemoveButton.Pressed += OnSentenceRemoveButtonPressed;
 	}
 	
-	private void SentenceRemoveButtonPressed()
+	private void OnSentenceRemoveButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Удалить предложение");
 		

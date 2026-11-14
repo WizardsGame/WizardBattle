@@ -13,20 +13,22 @@ public partial class Lobby : CanvasLayer
 	public override void _Ready()
 	{
 		//подгружаю заранее
-		 _wordVBox = GetNode<VBoxContainer>("RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin/WordsVBox");
+		 _wordVBox = GetNode<VBoxContainer>("%WordsVBox");
 		
-		var WordAddButton = GetNode<Button>("RootPanel/RootMargin/MenuPanel/MenuVBox/WordAddButtonMargin/WordAddButton");
-		var SaveToFileButton = GetNode<Button>("RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox/SaveToFileButton");
-		var ContinueButton = GetNode<Button>("RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox/ContinueButton");
-		var CrossButton = GetNode<Button>("CrossButton");
+		var wordAddButton = GetNode<Button>("%WordAddButton");
+		var saveToFileButton = GetNode<Button>("%SaveToFileButton");
+		var loadFromFileButton = GetNode<Button>("%LoadFromFileButton");
+		var continueButton = GetNode<Button>("%ContinueButton");
+		var backButton = GetNode<Button>("%BackButton");
 		
-		WordAddButton.Pressed += WordAddButtonPressed;
-		SaveToFileButton.Pressed += SaveToFileButtonPressed;
-		ContinueButton.Pressed += ContinueButtonPressed;
-		CrossButton.Pressed += OnCrossButtonPressed;
+		wordAddButton.Pressed += OnWordAddButtonPressed;
+		saveToFileButton.Pressed += OnSaveToFileButtonPressed;
+		loadFromFileButton.Pressed += OnLoadFromFileButtonPressed;
+		continueButton.Pressed += OnContinueButtonPressed;
+		backButton.Pressed += OnBackButtonPressed;
 	}
 
-	private void WordAddButtonPressed()
+	private void OnWordAddButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Добавить слово");
 		
@@ -45,14 +47,21 @@ public partial class Lobby : CanvasLayer
 		_wordVBox.AddChild(wordInstance);
 	}
 	
-	private void SaveToFileButtonPressed()
+	private void OnSaveToFileButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Сохранить в файл");
 		
 		//TODO: сохранение {слов:[]} в json файл
 	}
 
-	private void ContinueButtonPressed()
+	private void OnLoadFromFileButtonPressed()
+	{
+		GD.Print("Нажата кнопка: Загрузить из файла");
+		
+		//TODO: загрузка {слов:[]} из json файла
+	}
+
+	private void OnContinueButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Далее");
 		
@@ -66,7 +75,7 @@ public partial class Lobby : CanvasLayer
 		}
 	}
 
-	private void OnCrossButtonPressed()
+	private void OnBackButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Крестик");
 		

@@ -39,16 +39,19 @@ theme_override_font_sizes/font_size = 24
 text = "Слово"
 
 [node name="WordRemoveButton" type="Button" parent="ItemMargin/ItemVBox/HeaderHBox" unique_id=1564662749]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Удалить слово"
 text = "X"
 
 [node name="SentencesVBox" type="VBoxContainer" parent="ItemMargin/ItemVBox" unique_id=321199056]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="AddSentenceButton" type="Button" parent="ItemMargin/ItemVBox" unique_id=1402588044]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Добавить предложение"
