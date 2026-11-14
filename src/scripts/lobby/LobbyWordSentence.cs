@@ -14,6 +14,6 @@ public partial class LobbyWordSentence : PanelContainer
 	{
 		GD.Print("Нажата кнопка: Удалить предложение");
 		
-		//TODO: удаление только предложения, кнопка которого была нажата
+		QueueFree();
 	}
 }
