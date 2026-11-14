@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dpmq4xpcxs8ns"]
 
+[ext_resource type="Script" uid="uid://c6oh3wyhwu8qh" path="res://src/scripts/lobby/LobbyWord.cs" id="1_2a7pk"]
 [ext_resource type="PackedScene" uid="uid://pvk5aah21gdb" path="res://src/scenes/lobby/lobby_word_sentence.tscn" id="1_vcodj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
@@ -15,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_we06s")
+script = ExtResource("1_2a7pk")
 
 [node name="ItemMargin" type="MarginContainer" parent="." unique_id=931175958]
 layout_mode = 2
