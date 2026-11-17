@@ -57,7 +57,8 @@ public partial class Lobby : CanvasLayer
 
 			Node wordInstance = _wordScene.Instantiate();
 			Label wordLabel = wordInstance.GetNodeOrNull<Label>("ItemMargin/ItemVBox/HeaderHBox/WordLabel");
-			if (wordLabel == null) {
+			if (wordLabel == null)
+			{
 				GD.PrintErr("Ошибка: Label для слова предложения не найден!");
 				return;
 			}
@@ -124,6 +125,12 @@ public partial class Lobby : CanvasLayer
 
 	private void OnModalConfirmed()
 	{
+		var text = _modalLineEdit.Text.Trim();
+		if (text.Length == 0)
+			return;
+
+		_modalLineEdit.Text = text;
+		
 		var action = _currentOkEvent;
 		_currentOkEvent = null;
 
