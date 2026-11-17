@@ -19,6 +19,12 @@ public partial class LobbyWord : PanelContainer
 		addSentenceButton.Pressed += OnAddSentenceButtonPressed;
 	}
 
+	public void SetWord(string text)
+	{
+		var label = GetNode<Label>("%WordLabel");
+		label.Text = text;
+	}
+
 	private void OnWordRemoveButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Удалить слово");
@@ -30,18 +36,9 @@ public partial class LobbyWord : PanelContainer
 	{
 		GD.Print("Нажата кнопка: Добавить предложение");
 
-		Node sentenceInstance = _sentenceScene.Instantiate();
-		Label sentenceLabel = sentenceInstance.GetNodeOrNull<Label>("%SentenceLabel");
-
-		if (sentenceLabel != null)
-		{
-			// TODO: добавление в структуру с данными. интеграция модалки. вероятно, делегирование классу `Lobby`
-			sentenceLabel.Text = "Тестовое предложение";
-		}
-		else
-		{
-			GD.PrintErr("Ошибка: Label для текста предложения не найден!");
-		}
+		var sentenceInstance = _sentenceScene.Instantiate<LobbyWordSentence>();
+		// TODO: добавление в структуру с данными. интеграция модалки. вероятно, делегирование классу `Lobby`
+		sentenceInstance.SetSentence("Тестовое предложение");
 		_sentencesVBox.AddChild(sentenceInstance);
 	}
 }

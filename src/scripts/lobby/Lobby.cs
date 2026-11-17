@@ -49,22 +49,15 @@ public partial class Lobby : CanvasLayer
 	{
 		GD.Print("Нажата кнопка: Добавить слово");
 
-		OpenModal("Введите слово в начальной форме:", word =>
+		OpenModal("Введите слово в начальной форме:", text =>
 		{
 			// TODO: добавление слова в некоторую реальную структуру с данными!
 
-			Node wordInstance = _wordScene.Instantiate();
-			Label wordLabel = wordInstance.GetNodeOrNull<Label>("ItemMargin/ItemVBox/HeaderHBox/WordLabel");
-			if (wordLabel == null)
-			{
-				GD.PrintErr("Ошибка: Label для слова предложения не найден!");
-				return;
-			}
+			var word = _wordScene.Instantiate<LobbyWord>();
+			word.SetWord(text);
 
-			wordLabel.Text = word;
-			_wordVBox.AddChild(wordInstance);
+			_wordVBox.AddChild(word);
 		});
-
 	}
 
 	private void OnSaveToFileButtonPressed()

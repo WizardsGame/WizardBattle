@@ -10,6 +10,12 @@ public partial class LobbyWordSentence : PanelContainer
 		sentenceRemoveButton.Pressed += OnSentenceRemoveButtonPressed;
 	}
 
+	public void SetSentence(string text)
+	{
+		var label = GetNode<Label>("%SentenceLabel");
+		label.Text = text;
+	}
+
 	private void OnSentenceRemoveButtonPressed()
 	{
 		GD.Print("Нажата кнопка: Удалить предложение");
