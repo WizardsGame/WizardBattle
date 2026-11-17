@@ -15,7 +15,7 @@ public partial class Lobby : CanvasLayer
 
 	private PackedScene _wordScene = GD.Load<PackedScene>("res://src/scenes/lobby/lobby_word.tscn");
 
-	private Action _currentOkEvent;
+	private Action<string> _currentOkEvent;
 
 	public override void _Ready()
 	{
@@ -49,10 +49,8 @@ public partial class Lobby : CanvasLayer
 	{
 		GD.Print("Нажата кнопка: Добавить слово");
 
-		OpenModal("Введите слово в начальной форме:", () =>
+		OpenModal("Введите слово в начальной форме:", word =>
 		{
-			var word = _modalLineEdit.Text;
-
 			// TODO: добавление слова в некоторую реальную структуру с данными!
 
 			Node wordInstance = _wordScene.Instantiate();
@@ -129,16 +127,14 @@ public partial class Lobby : CanvasLayer
 		if (text.Length == 0)
 			return;
 
-		_modalLineEdit.Text = text;
-		
 		var action = _currentOkEvent;
 		_currentOkEvent = null;
 
-		action?.Invoke();
+		action?.Invoke(text);
 		CloseModal();
 	}
 
-	private void OpenModal(string titleText, Action okEvent)
+	private void OpenModal(string titleText, Action<string> okEvent)
 	{
 		_modalTitleLabel.Text = titleText;
 		_modalLineEdit.Clear();
