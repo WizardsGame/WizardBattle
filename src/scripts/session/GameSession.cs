@@ -17,6 +17,13 @@ public partial class GameSession : Node
         Lesson = null;
     }
 
+    public void ReplaceDraft(LessonDraft draft)
+    {
+        ArgumentNullException.ThrowIfNull(draft);
+        Draft = draft;
+        Lesson = null;
+    }
+
     public void StartMatch()
     {
         if (Draft is null)

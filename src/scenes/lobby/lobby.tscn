@@ -134,6 +134,40 @@ size_flags_stretch_ratio = 2.0
 theme_override_font_sizes/font_size = 24
 text = "Далее"
 
+[node name="SaveFileDialog" type="FileDialog" parent="." unique_id=1820349544]
+unique_name_in_owner = true
+title = "Сохранить учебный материал"
+size = Vector2i(900, 600)
+mode_overrides_title = false
+access = 2
+filters = PackedStringArray("*.json;Учебный материал JSON")
+use_native_dialog = true
+
+[node name="LoadFileDialog" type="FileDialog" parent="." unique_id=429397418]
+unique_name_in_owner = true
+title = "Загрузить учебный материал"
+size = Vector2i(900, 600)
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json;Учебный материал JSON")
+use_native_dialog = true
+
+[node name="ImportDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Загрузить слова и предложения"
+size = Vector2i(560, 180)
+dialog_text = "В лобби уже есть слова. Как загрузить данные из файла?\nДобавить — объединить слова и предложения без повторов.\nЗаменить — удалить текущие данные и загрузить файл."
+dialog_autowrap = true
+ok_button_text = "Добавить"
+cancel_button_text = "Отмена"
+
+[node name="FileErrorDialog" type="AcceptDialog" parent="." unique_id=1325093018]
+unique_name_in_owner = true
+oversampling_override = 1.0
+size = Vector2i(600, 180)
+dialog_autowrap = true
+
 [node name="ModalBackdropRoot" type="PanelContainer" parent="." unique_id=1211634433]
 unique_name_in_owner = true
 visible = false
