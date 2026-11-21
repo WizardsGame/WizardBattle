@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_hkety")
+SpellName = "Лечение"
 metadata/_custom_type_script = "uid://bojnldsaruu86"

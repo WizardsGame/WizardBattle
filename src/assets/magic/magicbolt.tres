@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_8lv7n")
+SpellName = "Магический выстрел"
+Damage = 15
 metadata/_custom_type_script = "uid://b2emprglufwrk"
