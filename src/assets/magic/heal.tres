@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Heal" format=3 uid="uid://x68yc6bws8x5"]
+
+[ext_resource type="Script" uid="uid://bojnldsaruu86" path="res://src/scripts/game/magic/Heal.cs" id="1_hkety"]
+
+[resource]
+script = ExtResource("1_hkety")
+metadata/_custom_type_script = "uid://bojnldsaruu86"

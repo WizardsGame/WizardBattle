@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Teleport" format=3 uid="uid://b81yvlsvs7ub4"]
+
+[ext_resource type="Script" uid="uid://cqudqwkyg4wss" path="res://src/scripts/game/magic/Teleport.cs" id="1_3wlfo"]
+
+[resource]
+script = ExtResource("1_3wlfo")
+SpellName = "Телепорт"
+metadata/_custom_type_script = "uid://cqudqwkyg4wss"

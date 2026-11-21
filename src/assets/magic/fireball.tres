@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Fireball" format=3 uid="uid://dikxx7g61tjsp"]
+
+[ext_resource type="Script" uid="uid://rmjvsygkdfdk" path="res://src/scripts/game/magic/Fireball.cs" id="1_h6fv4"]
+
+[resource]
+script = ExtResource("1_h6fv4")
+SpellName = "Огненный шар"
+Damage = 25
+metadata/_custom_type_script = "uid://rmjvsygkdfdk"

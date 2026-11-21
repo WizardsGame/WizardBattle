@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MagicBolt" format=3 uid="uid://l7jgo455d5d7"]
+
+[ext_resource type="Script" uid="uid://b2emprglufwrk" path="res://src/scripts/game/magic/MagicBolt.cs" id="1_8lv7n"]
+
+[resource]
+script = ExtResource("1_8lv7n")
+metadata/_custom_type_script = "uid://b2emprglufwrk"
