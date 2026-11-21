@@ -2,9 +2,31 @@
 
 [ext_resource type="Script" uid="uid://byqult3lnckml" path="res://src/scripts/game/Wizard.cs" id="1_i3aa6"]
 [ext_resource type="Texture2D" uid="uid://c1divw4agfb41" path="res://src/assets/temporary_wizard.png" id="2_b8hmv"]
+[ext_resource type="Script" uid="uid://d1gygw4qstx72" path="res://src/scripts/game/magic/Magic.cs" id="2_l4kuu"]
+[ext_resource type="Script" uid="uid://rmjvsygkdfdk" path="res://src/scripts/game/magic/Fireball.cs" id="3_oe2tt"]
+[ext_resource type="Script" uid="uid://bojnldsaruu86" path="res://src/scripts/game/magic/Heal.cs" id="4_k227h"]
+[ext_resource type="Script" uid="uid://b2emprglufwrk" path="res://src/scripts/game/magic/MagicBolt.cs" id="5_cglxy"]
+[ext_resource type="Script" uid="uid://cqudqwkyg4wss" path="res://src/scripts/game/magic/Teleport.cs" id="6_nepsy"]
+
+[sub_resource type="Resource" id="Resource_3wlfo"]
+script = ExtResource("3_oe2tt")
+metadata/_custom_type_script = "uid://rmjvsygkdfdk"
+
+[sub_resource type="Resource" id="Resource_nwryn"]
+script = ExtResource("4_k227h")
+metadata/_custom_type_script = "uid://bojnldsaruu86"
+
+[sub_resource type="Resource" id="Resource_i0joi"]
+script = ExtResource("5_cglxy")
+metadata/_custom_type_script = "uid://b2emprglufwrk"
+
+[sub_resource type="Resource" id="Resource_fo6p5"]
+script = ExtResource("6_nepsy")
+metadata/_custom_type_script = "uid://cqudqwkyg4wss"
 
 [node name="Wizard" type="Node2D" unique_id=221284188]
 script = ExtResource("1_i3aa6")
+Spellbook = Array[ExtResource("2_l4kuu")]([SubResource("Resource_3wlfo"), SubResource("Resource_nwryn"), SubResource("Resource_i0joi"), SubResource("Resource_fo6p5")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1920189667]
 scale = Vector2(0.206, 0.2)
