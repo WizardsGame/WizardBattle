@@ -162,10 +162,14 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ModalTitleLabel" type="Label" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox" unique_id=298596204]
+[node name="ModalTitleLabel" type="RichTextLabel" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox" unique_id=298596204]
 unique_name_in_owner = true
 layout_mode = 2
+bbcode_enabled = true
 text = "Введите что-нибудь нужное и полезное"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="ModalLineEdit" type="LineEdit" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox" unique_id=103532429]
 unique_name_in_owner = true

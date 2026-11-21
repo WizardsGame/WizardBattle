@@ -1,4 +1,5 @@
 using Godot;
+using WizardBattle.Session;
 
 public partial class MainMenu : Control
 {
@@ -39,6 +40,7 @@ public partial class MainMenu : Control
 		
 		if (ResourceLoader.Exists(CreateLobbyScenePath))
 		{
+			GetNode<GameSession>("/root/GameSession").BeginPreparation();
 			GetTree().ChangeSceneToFile(CreateLobbyScenePath);
 		}
 		else

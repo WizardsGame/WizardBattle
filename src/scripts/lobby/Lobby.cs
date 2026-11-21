@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using WizardBattle.Lessons;
+using WizardBattle.Session;
 
 public partial class Lobby : CanvasLayer
 {
@@ -7,9 +10,10 @@ public partial class Lobby : CanvasLayer
 	[Export] public string ContinueScenePath = "на следующую сцену";
 
 	private VBoxContainer _wordVBox;
+	private LessonDraft _draft;
 
 	private PanelContainer _modalBackdropRoot;
-	private Label _modalTitleLabel;
+	private RichTextLabel _modalTitleLabel;
 	private LineEdit _modalLineEdit;
 	private Button _modalOkButton;
 
@@ -22,7 +26,7 @@ public partial class Lobby : CanvasLayer
 		// подгружаем заранее
 		_wordVBox = GetNode<VBoxContainer>("%WordsVBox");
 		_modalBackdropRoot = GetNode<PanelContainer>("%ModalBackdropRoot");
-		_modalTitleLabel = GetNode<Label>("%ModalTitleLabel");
+		_modalTitleLabel = GetNode<RichTextLabel>("%ModalTitleLabel");
 		_modalLineEdit = GetNode<LineEdit>("%ModalLineEdit");
 		_modalOkButton = GetNode<Button>("%ModalOkButton");
 
@@ -43,41 +47,119 @@ public partial class Lobby : CanvasLayer
 		_modalLineEdit.TextSubmitted += OnModalTextSubmitted;
 		_modalOkButton.Pressed += OnModalConfirmed;
 		modalCancelButton.Pressed += OnModalCancelButtonPressed;
+
+		var session = GetNode<GameSession>("/root/GameSession");
+		// Позволяет запускать лобби напрямую из редактора.
+		if (session.Draft is null)
+			session.BeginPreparation();
+
+		_draft = session.Draft;
+		RenderDraft();
 	}
 
 	private void OnWordAddButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Добавить слово");
+		OpenModal("Введите слово в начальной форме:", AddWord);
+	}
 
-		OpenModal("Введите слово в начальной форме:", text =>
+	private void RenderDraft()
+	{
+		foreach (var child in _wordVBox.GetChildren())
 		{
-			// TODO: добавление слова в некоторую реальную структуру с данными!
+			_wordVBox.RemoveChild(child);
+			child.QueueFree();
+		}
 
-			var word = _wordScene.Instantiate<LobbyWord>();
-			word.SetWord(text);
+		foreach (var entry in _draft.SentencesByWord)
+			ShowWord(entry.Key, entry.Value);
+	}
 
-			_wordVBox.AddChild(word);
-		});
+	private void AddWord(string text)
+	{
+		var sentences = new List<string>();
+		if (!_draft.SentencesByWord.TryAdd(text, sentences))
+		{
+			GD.PrintErr($"Слово \"{text}\" уже добавлено.");
+			return;
+		}
+
+		ShowWord(text, sentences);
+	}
+
+	private void ShowWord(string wordText, IEnumerable<string> sentences)
+	{
+		var wordView = _wordScene.Instantiate<LobbyWord>();
+		wordView.SetWord(wordText);
+
+		wordView.AddSentenceRequested += () =>
+		{
+			OpenModal("Введите предложение с #ответами#:\n[i]Важно: мест вставки для одного слова может быть несколько.\nНапример, для глагола to howl: \"#Does# the black moon #howl#?\"[/i]", sentence =>
+			{
+				AddSentence(wordText, wordView, sentence);
+			});
+		};
+		wordView.RemoveRequested += () => RemoveWord(wordText, wordView);
+
+		_wordVBox.AddChild(wordView);
+
+		foreach (var sentence in sentences)
+			ShowSentence(wordText, wordView, sentence);
+	}
+
+	private void AddSentence(string word, LobbyWord wordView, string sentenceText)
+	{
+		var sentences = _draft.SentencesByWord[word];
+		if (sentences.Contains(sentenceText))
+		{
+			GD.PrintErr("Это предложение уже добавлено к слову.");
+			return;
+		}
+
+		sentences.Add(sentenceText);
+		ShowSentence(word, wordView, sentenceText);
+	}
+
+	private void ShowSentence(string word, LobbyWord wordView, string text)
+	{
+		var view = wordView.AddSentence(text);
+		view.RemoveRequested += () => RemoveSentence(word, text, view);
+	}
+
+	private void RemoveWord(string word, LobbyWord view)
+	{
+		if (!_draft.SentencesByWord.Remove(word, out var sentences))
+			return;
+
+		foreach (var sentence in sentences)
+			_draft.SpellIdBySentence.Remove(sentence);
+
+		view.QueueFree();
+	}
+
+	private void RemoveSentence(string word, string text, LobbyWordSentence view)
+	{
+		if (!_draft.SentencesByWord.TryGetValue(word, out var sentences) ||
+			!sentences.Remove(text))
+		{
+			return;
+		}
+
+		_draft.SpellIdBySentence.Remove(text);
+		view.QueueFree();
 	}
 
 	private void OnSaveToFileButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Сохранить в файл");
-
 		//TODO: сохранение {слов:[]} в json файл
 	}
 
 	private void OnLoadFromFileButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Загрузить из файла");
-
 		//TODO: загрузка {слов:[]} из json файла
 	}
 
 	private void OnContinueButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Далее");
-
 		if (ResourceLoader.Exists(ContinueScenePath))
 		{
 			GetTree().ChangeSceneToFile(ContinueScenePath);
@@ -90,8 +172,6 @@ public partial class Lobby : CanvasLayer
 
 	private void OnBackButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Крестик");
-
 		if (ResourceLoader.Exists(CrossScenePath))
 		{
 			GetTree().ChangeSceneToFile(CrossScenePath);
@@ -104,8 +184,6 @@ public partial class Lobby : CanvasLayer
 
 	private void OnModalCancelButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Отмена в модальном окне ввода");
-
 		CloseModal();
 	}
 

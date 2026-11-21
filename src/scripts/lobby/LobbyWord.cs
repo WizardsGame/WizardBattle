@@ -3,6 +3,9 @@ using System;
 
 public partial class LobbyWord : PanelContainer
 {
+	public event Action AddSentenceRequested;
+	public event Action RemoveRequested;
+
 	private VBoxContainer _sentencesVBox;
 
 	private PackedScene _sentenceScene = GD.Load<PackedScene>("res://src/scenes/lobby/lobby_word_sentence.tscn");
@@ -27,18 +30,19 @@ public partial class LobbyWord : PanelContainer
 
 	private void OnWordRemoveButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Удалить слово");
-		// TODO: самоудаление из структуры с данными. вероятно, делегирование классу `Lobby`
-		QueueFree();
+		RemoveRequested?.Invoke();
+	}
+
+	public LobbyWordSentence AddSentence(string text)
+	{
+		var sentenceInstance = _sentenceScene.Instantiate<LobbyWordSentence>();
+		sentenceInstance.SetSentence(text);
+		_sentencesVBox.AddChild(sentenceInstance);
+		return sentenceInstance;
 	}
 
 	private void OnAddSentenceButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Добавить предложение");
-
-		var sentenceInstance = _sentenceScene.Instantiate<LobbyWordSentence>();
-		// TODO: добавление в структуру с данными. интеграция модалки. вероятно, делегирование классу `Lobby`
-		sentenceInstance.SetSentence("Тестовое предложение");
-		_sentencesVBox.AddChild(sentenceInstance);
+		AddSentenceRequested?.Invoke();
 	}
 }
