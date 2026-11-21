@@ -14,12 +14,14 @@ public partial class Lobby : CanvasLayer
 
 	private PanelContainer _modalBackdropRoot;
 	private RichTextLabel _modalTitleLabel;
+	private Label _modalErrorLabel;
 	private LineEdit _modalLineEdit;
 	private Button _modalOkButton;
 
 	private PackedScene _wordScene = GD.Load<PackedScene>("res://src/scenes/lobby/lobby_word.tscn");
 
 	private Action<string> _currentOkEvent;
+	private Func<string, string> _currentValidator;
 
 	public override void _Ready()
 	{
@@ -27,6 +29,7 @@ public partial class Lobby : CanvasLayer
 		_wordVBox = GetNode<VBoxContainer>("%WordsVBox");
 		_modalBackdropRoot = GetNode<PanelContainer>("%ModalBackdropRoot");
 		_modalTitleLabel = GetNode<RichTextLabel>("%ModalTitleLabel");
+		_modalErrorLabel = GetNode<Label>("%ModalErrorLabel");
 		_modalLineEdit = GetNode<LineEdit>("%ModalLineEdit");
 		_modalOkButton = GetNode<Button>("%ModalOkButton");
 
@@ -96,7 +99,7 @@ public partial class Lobby : CanvasLayer
 			OpenModal("Введите предложение с #ответами#:\n[i]Важно: мест вставки для одного слова может быть несколько.\nНапример, для глагола to howl: \"#Does# the black moon #howl#?\"[/i]", sentence =>
 			{
 				AddSentence(wordText, wordView, sentence);
-			});
+			}, ValidateSentenceMarkup);
 		};
 		wordView.RemoveRequested += () => RemoveWord(wordText, wordView);
 
@@ -117,6 +120,12 @@ public partial class Lobby : CanvasLayer
 
 		sentences.Add(sentenceText);
 		ShowSentence(word, wordView, sentenceText);
+	}
+
+	private static string ValidateSentenceMarkup(string text)
+	{
+		SentenceMarkup.TryValidate(text, out var error);
+		return error;
 	}
 
 	private void ShowSentence(string word, LobbyWord wordView, string text)
@@ -196,28 +205,55 @@ public partial class Lobby : CanvasLayer
 	{
 		var text = _modalLineEdit.Text.Trim();
 		if (text.Length == 0)
+		{
+			ShowModalError("Введите текст.");
 			return;
+		}
+
+		var error = _currentValidator?.Invoke(text);
+		if (error != null)
+		{
+			ShowModalError(error);
+			return;
+		}
 
 		var action = _currentOkEvent;
 		_currentOkEvent = null;
+		_currentValidator = null;
 
 		action?.Invoke(text);
 		CloseModal();
 	}
 
-	private void OpenModal(string titleText, Action<string> okEvent)
+	private void OpenModal(
+		string titleText,
+		Action<string> okEvent,
+		Func<string, string> validator = null)
 	{
 		_modalTitleLabel.Text = titleText;
 		_modalLineEdit.Clear();
 		_currentOkEvent = okEvent;
+		_currentValidator = validator;
+		_modalErrorLabel.Text = string.Empty;
+		_modalErrorLabel.Visible = false;
 
 		_modalBackdropRoot.Visible = true;
+		_modalLineEdit.GrabFocus();
+	}
+
+	private void ShowModalError(string error)
+	{
+		_modalErrorLabel.Text = $"Ошибка: {error}";
+		_modalErrorLabel.Visible = true;
 		_modalLineEdit.GrabFocus();
 	}
 
 	private void CloseModal()
 	{
 		_currentOkEvent = null;
+		_currentValidator = null;
+		_modalErrorLabel.Text = string.Empty;
+		_modalErrorLabel.Visible = false;
 		_modalLineEdit.Clear();
 		_modalBackdropRoot.Visible = false;
 	}
