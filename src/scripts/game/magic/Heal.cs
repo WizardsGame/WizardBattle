@@ -12,7 +12,7 @@ public partial class Heal : Magic
 	{
 		if (targetWizard == null)
 		{
-			GD.PrintErr($"{SpellName}: нужен目标-игрок для лечения");
+			GD.PrintErr($"{SpellName}: нужен-игрок для лечения");
 			return;
 		}
 		targetWizard.Health = Mathf.Min(targetWizard.Health + HealAmount, targetWizard.MaxHealth);
