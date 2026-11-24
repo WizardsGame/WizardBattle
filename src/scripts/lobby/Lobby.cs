@@ -189,9 +189,27 @@ public partial class Lobby : CanvasLayer
 
 	private void SaveLesson(string path)
 	{
+		// Обнаружился баг: файловый диалог KDE сразу переключает тип с JSON на "Все файлы", стоит
+		// ввести хоть один символ в поле имени файла. В итоге файл сохраняется без расширения,
+		// и LoadFileDialog с фильтром *.json его потом не видит.
+		//
+		// Это НЕ наш баг, но обойти его всё равно надо, иначе это вызовет возмущение юзеров.
+		// Windows данной проблеме не подвержена, диалоги прочих DE не проверялись.
+		//
+		// Костыль дописывает .json к имени, если расширения нет, и вручную ловит попытки случайной
+		// перезаписи, возникающие из-за этого изменения, показывая стандартный диалог ошибки.
+		if (!path.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+			path += ".json";
+
 		try
 		{
 			LessonDraftFile.Save(path, _draft);
+		}
+		catch (IOException) when (File.Exists(path))
+		{
+			_fileErrorDialog.Title = "Файл уже существует";
+			_fileErrorDialog.DialogText = $"Файл \"{Path.GetFileName(path)}\" уже существует. Выберите другое имя.";
+			_fileErrorDialog.PopupCentered();
 		}
 		catch (Exception error) when (IsFileError(error))
 		{

@@ -38,7 +38,10 @@ public static class LessonDraftFile
         try
         {
             File.WriteAllText(temporaryPath, json);
-            File.Move(temporaryPath, path, overwrite: true);
+
+            // Открыто блокируем перезаписи на уровне ФС.
+            // Причина: см. Lobby.SaveLesson(string), src/scripts/lobby/Lobby.cs
+            File.Move(temporaryPath, path, overwrite: false);
         }
         finally
         {
