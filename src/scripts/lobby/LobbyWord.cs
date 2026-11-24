@@ -3,43 +3,46 @@ using System;
 
 public partial class LobbyWord : PanelContainer
 {
+	public event Action AddSentenceRequested;
+	public event Action RemoveRequested;
+
 	private VBoxContainer _sentencesVBox;
-	
+
 	private PackedScene _sentenceScene = GD.Load<PackedScene>("res://src/scenes/lobby/lobby_word_sentence.tscn");
-	
+
 	public override void _Ready()
 	{
 		//подгружаю заранее
-		 _sentencesVBox = GetNode<VBoxContainer>("ItemMargin/ItemVBox/SentencesVBox");
-		
-		var WordRemoveButton = GetNode<Button>("ItemMargin/ItemVBox/HeaderHBox/WordRemoveButton");
-		var AddSentenceButton = GetNode<Button>("ItemMargin/ItemVBox/AddSentenceButton");
-		
-		WordRemoveButton.Pressed += WordRemoveButtonPressed;
-		AddSentenceButton.Pressed += AddSentenceButtonPressed;
+		_sentencesVBox = GetNode<VBoxContainer>("%SentencesVBox");
+
+		var wordRemoveButton = GetNode<Button>("%WordRemoveButton");
+		var addSentenceButton = GetNode<Button>("%AddSentenceButton");
+
+		wordRemoveButton.Pressed += OnWordRemoveButtonPressed;
+		addSentenceButton.Pressed += OnAddSentenceButtonPressed;
 	}
-	
-	private void WordRemoveButtonPressed()
+
+	public void SetWord(string text)
 	{
-		GD.Print("Нажата кнопка: Удалить слово");
-		QueueFree();
+		var label = GetNode<Label>("%WordLabel");
+		label.Text = text;
 	}
-	
-	private void AddSentenceButtonPressed()
+
+	private void OnWordRemoveButtonPressed()
 	{
-		GD.Print("Нажата кнопка: Добавить предложение");
-		
-		Node sentenceInstance = _sentenceScene.Instantiate();
-		Label sentenceLabel = sentenceInstance.GetNodeOrNull<Label>("SentenceMargin/SentenceHBox/SentenceLabel");
-		
-		if (sentenceLabel != null)
-		{
-			sentenceLabel.Text = "Тестовое предложение";
-		}
-		else
-		{
-			GD.PrintErr("Ошибка: Label для текста предложения не найден!");
-		}
+		RemoveRequested?.Invoke();
+	}
+
+	public LobbyWordSentence AddSentence(string text)
+	{
+		var sentenceInstance = _sentenceScene.Instantiate<LobbyWordSentence>();
+		sentenceInstance.SetSentence(text);
 		_sentencesVBox.AddChild(sentenceInstance);
+		return sentenceInstance;
+	}
+
+	private void OnAddSentenceButtonPressed()
+	{
+		AddSentenceRequested?.Invoke();
 	}
 }

@@ -13,7 +13,7 @@ public partial class MapView : Node2D
 	public TileMapLayer Obstacles { get; set; }
 
 	[Export]
-    public TileMapLayer Highlight { get; set; }
+	public TileMapLayer Highlight { get; set; }
 
 	public void Render(MapData map)
 	{
@@ -53,13 +53,13 @@ public partial class MapView : Node2D
 	}
 
 	public void ShowHighlight(Dictionary<Vector2I, int> reachableCells)
-    {
-        if (Highlight == null) return;
+	{
+		if (Highlight == null) return;
 
-        Highlight.Clear();
-        foreach (var pos in reachableCells.Keys)
-        {
-            Highlight.SetCell(pos, sourceId: 0, atlasCoords: new Vector2I(0, 0));
-        }
-    }
+		Highlight.Clear();
+		foreach (var pos in reachableCells.Keys)
+		{
+			Highlight.SetCell(pos, sourceId: 0, atlasCoords: new Vector2I(0, 0));
+		}
+	}
 }

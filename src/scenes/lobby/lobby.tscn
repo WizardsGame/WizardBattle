@@ -6,6 +6,13 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we06s"]
 bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8h5k"]
+bg_color = Color(0.43529412, 0.43529412, 0.43529412, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=197823937]
 script = ExtResource("1_k6g8w")
 
@@ -30,17 +37,40 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_we06s")
 [node name="MenuVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel" unique_id=118649321]
 layout_mode = 2
 
-[node name="ScreenTitleLabel" type="Label" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=900908292]
+[node name="TitleHBox" type="HBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1140459329]
 layout_mode = 2
+
+[node name="LeftSpacer" type="Control" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/TitleHBox" unique_id=1447276222]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="ScreenTitleLabel" type="Label" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/TitleHBox" unique_id=900908292]
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 text = "Заполнение слов и предложений"
 horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/TitleHBox" unique_id=1384865671]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("3_1jq6v")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="WordAddButtonMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox" unique_id=1074726765]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 
 [node name="WordAddButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordAddButtonMargin" unique_id=852880388]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 20
@@ -65,6 +95,7 @@ size_flags_vertical = 3
 theme_override_constants/margin_right = 10
 
 [node name="WordsVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/WordsMargin/WordsScroll/WordsScrollMargin" unique_id=61637394]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
@@ -82,26 +113,123 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="SaveToFileButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=1614659787]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "Сохранить в файл"
 
-[node name="ContinueButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=506186421]
+[node name="LoadFromFileButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=1193958087]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
+text = "Загрузить из файла"
+
+[node name="ContinueButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox" unique_id=506186421]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 24
 text = "Далее"
 
-[node name="CrossButton" type="Button" parent="." unique_id=1384865671]
-custom_minimum_size = Vector2(100, 100)
-anchors_preset = 1
-anchor_left = 1.0
+[node name="SaveFileDialog" type="FileDialog" parent="." unique_id=1820349544]
+unique_name_in_owner = true
+title = "Сохранить учебный материал"
+size = Vector2i(900, 600)
+mode_overrides_title = false
+access = 2
+filters = PackedStringArray("*.json;Учебный материал JSON")
+use_native_dialog = true
+
+[node name="LoadFileDialog" type="FileDialog" parent="." unique_id=429397418]
+unique_name_in_owner = true
+title = "Загрузить учебный материал"
+size = Vector2i(900, 600)
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json;Учебный материал JSON")
+use_native_dialog = true
+
+[node name="ImportDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Загрузить слова и предложения"
+size = Vector2i(560, 180)
+dialog_text = "В лобби уже есть слова. Как загрузить данные из файла?\nДобавить — объединить слова и предложения без повторов.\nЗаменить — удалить текущие данные и загрузить файл."
+dialog_autowrap = true
+ok_button_text = "Добавить"
+cancel_button_text = "Отмена"
+
+[node name="FileErrorDialog" type="AcceptDialog" parent="." unique_id=1325093018]
+unique_name_in_owner = true
+oversampling_override = 1.0
+size = Vector2i(600, 180)
+dialog_autowrap = true
+
+[node name="ModalBackdropRoot" type="PanelContainer" parent="." unique_id=1211634433]
+unique_name_in_owner = true
+visible = false
+z_index = 100
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 100.0
-grow_horizontal = 0
-icon = ExtResource("3_1jq6v")
-flat = true
-icon_alignment = 1
-expand_icon = true
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ModalRootPanel" type="PanelContainer" parent="ModalBackdropRoot" unique_id=35696169]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e8h5k")
+
+[node name="ModalMargin" type="MarginContainer" parent="ModalBackdropRoot/ModalRootPanel" unique_id=2037015285]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 30
+
+[node name="ModalVBox" type="VBoxContainer" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin" unique_id=57890054]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ModalTitleLabel" type="RichTextLabel" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox" unique_id=298596204]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Введите что-нибудь нужное и полезное"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ModalErrorLabel" type="Label" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox" unique_id=1798338165]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.41960785)
+
+[node name="ModalLineEdit" type="LineEdit" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox" unique_id=103532429]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Введите текст..."
+
+[node name="ModalButtonsHBox" type="HBoxContainer" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox" unique_id=145140621]
+layout_mode = 2
+
+[node name="ModalOkButton" type="Button" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox/ModalButtonsHBox" unique_id=27432079]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "ОК"
+
+[node name="ModalCancelButton" type="Button" parent="ModalBackdropRoot/ModalRootPanel/ModalMargin/ModalVBox/ModalButtonsHBox" unique_id=1056509536]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Отмена"
