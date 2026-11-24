@@ -133,4 +133,7 @@ public partial class WizardPlayer : Wizard
         path.Reverse(); // Переворачиваем, чтобы путь шел от старта к цели
         return path;
     }
+
+    // Проверяет именно последний рассчитанный диапазон, не запуская новый поиск пути.
+    public bool IsCellReachable(Vector2I targetCell) => _reachableCells.ContainsKey(targetCell);
 }

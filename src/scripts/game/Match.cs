@@ -9,7 +9,8 @@ namespace WizardBattle.Game;
 public enum InputMode
 {
     Default, // Ожидание выбора
-    WizardPlayerSelected // Игрок выбрал себя, ждём клетку куда переместиться
+    WizardPlayerSelected, // Игрок выбрал себя, ждём клетку куда переместиться
+    CastingSpell // Выбрано заклинание, ждём цель заклинания
 }
 
 public partial class Match : Node2D
@@ -71,21 +72,23 @@ public partial class Match : Node2D
     {
         if (CurrentMap == null || World?.Ground == null)
         {
-            throw new InvalidOperationException("Обработчик нажатий не видит карту");
+            return;
         }
 
-        // клик мышкой
+        // Пока выбран маг, обновляем маршрут при наведении на клетку.
+        if (@event is InputEventMouseMotion && _inputMode == InputMode.WizardPlayerSelected)
+        {
+            if (TryGetCellUnderMouse(out var hoveredCell))
+                UpdatePathPreview(hoveredCell);
+            else
+                World.ClearPathPreview();
+
+            return;
+        }
+
         if (@event is InputEventMouseButton mouseButton && mouseButton.Pressed)
         {
-            Vector2 globalMousePos = GetGlobalMousePosition();
-            Vector2 localPos = World.Ground.ToLocal(globalMousePos);
-            Vector2I clickedCell = World.Ground.LocalToMap(localPos);
-
-            if (clickedCell.X < 0 || clickedCell.Y < 0 ||
-                clickedCell.X >= CurrentMap.Width || clickedCell.Y >= CurrentMap.Height)
-            {
-                throw new InvalidOperationException("Нажатие вне поля");
-            }
+            if (!TryGetCellUnderMouse(out var clickedCell)) return;
 
             GD.Print($"Клик по клетке: X = {clickedCell.X}, Y = {clickedCell.Y}");
 
@@ -101,57 +104,101 @@ public partial class Match : Node2D
         }
     }
 
+    private bool TryGetCellUnderMouse(out Vector2I cell)
+    {
+        Vector2 localPos = World.Ground.ToLocal(GetGlobalMousePosition());
+        cell = World.Ground.LocalToMap(localPos);
+
+        return cell.X >= 0 && cell.Y >= 0 &&
+               cell.X < CurrentMap.Width && cell.Y < CurrentMap.Height;
+    }
+
     private void HandleLeftMouseClick(Vector2I clickedCell)
     {
         switch (_inputMode)
         {
             case InputMode.Default:
                 //Wizard clickedWizard = _wizards.Find(w => w.curPosition == clickedCell);
-                if (clickedCell != _wizardPlayer.CurPosition) break;
-                _selectedWizard = _wizardPlayer;
-                _inputMode = InputMode.WizardPlayerSelected;
-                var reachable = _wizardPlayer.CalculateReachableCells(CurrentMap, _wizards);
-                World.ShowHighlight(reachable);
-                GD.Print($"Выбран игрок {_selectedWizard.CurPosition}");
+                if (_wizardPlayer == null || clickedCell != _wizardPlayer.CurPosition) break;
+                BeginWizardSelection(_wizardPlayer);
                 break;
 
             case InputMode.WizardPlayerSelected:
-                List<Vector2I> path = _wizardPlayer.GetPathTo(clickedCell);
-
-                var reachableCells = _wizardPlayer.CalculateReachableCells(CurrentMap, _wizards);
-                if (_wizardPlayer.CurPosition == clickedCell 
-                || !reachableCells.ContainsKey(clickedCell)
-                || _wizards.Exists(w => w.CurPosition == clickedCell))
+                if (_selectedWizard == null || clickedCell == _selectedWizard.CurPosition ||
+                    !_wizardPlayer.IsCellReachable(clickedCell) ||
+                    _wizards.Exists(w => w.CurPosition == clickedCell))
                 {
                     GD.Print("Выделение снято");
-                    World.Highlight?.Clear();
-                    _inputMode = InputMode.Default;
-                    _selectedWizard = null;
+                    ChangeInputMode(InputMode.Default);
                     break;
                 }
 
+                // Используем тот же расчёт достижимости, который был сделан при выборе мага.
+                // GetPathTo восстанавливает путь из этого кэша, не запуская новый поиск.
+                List<Vector2I> path = _wizardPlayer.GetPathTo(clickedCell);
                 _selectedWizard.PlaceOnCell(clickedCell, World.Ground);
-                foreach(var pos in reachableCells)
-                {
-                    GD.Print(pos);
-                }
                 GD.Print($"Построен путь длиной в {path.Count} шагов. Конечная цель: {clickedCell}");
-                foreach(var pos in path)
+                foreach (var pos in path)
                 {
                     GD.Print($"({pos})->");
                 }
 
-                World.Highlight?.Clear();
-                _inputMode = InputMode.Default;
-                _selectedWizard = null;
+                ChangeInputMode(InputMode.Default);
+                break;
+
+            case InputMode.CastingSpell:
+                // TODO: Обработка цели заклинания
                 break;
         }
+    }
+
+    private void BeginWizardSelection(WizardPlayer wizard)
+    {
+        _selectedWizard = wizard;
+        ChangeInputMode(InputMode.WizardPlayerSelected);
+
+        var reachableCells = wizard.CalculateReachableCells(CurrentMap, _wizards);
+        World.ShowHighlight(reachableCells);
+        GD.Print($"Выбран игрок {_selectedWizard.CurPosition}");
+    }
+
+    // Точка входа для UI/системы заклинаний: после выбора заклинания можно вызвать этот метод.
+    public void BeginCastingSpell()
+    {
+        if (_wizardPlayer == null) return;
+
+        _selectedWizard = _wizardPlayer;
+        ChangeInputMode(InputMode.CastingSpell);
+    }
+
+    private void UpdatePathPreview(Vector2I targetCell)
+    {
+        if (_wizardPlayer == null || !_wizardPlayer.IsCellReachable(targetCell) ||
+            _wizards.Exists(w => w.CurPosition == targetCell))
+        {
+            World.ClearPathPreview();
+            return;
+        }
+
+        World.ShowPathPreview(_wizardPlayer.GetPathTo(targetCell), _wizardPlayer.CurPosition);
+    }
+
+    private void ChangeInputMode(InputMode nextMode)
+    {
+        if (_inputMode == nextMode) return;
+
+        if (_inputMode == InputMode.WizardPlayerSelected)
+            World?.ClearSelectionHighlights();
+
+        _inputMode = nextMode;
+        if (nextMode == InputMode.Default)
+            _selectedWizard = null;
     }
 
     private void HandleRightMouseClick(Vector2I clickedCell)
     {
         VirtualCell cellData = CurrentMap.Cells[clickedCell.X, clickedCell.Y];
-        _inputMode = InputMode.Default;
+        ChangeInputMode(InputMode.Default);
         GD.Print($"Клетка {cellData.GetType().Name}");
     }
 
