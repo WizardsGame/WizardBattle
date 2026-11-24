@@ -5,6 +5,32 @@
 [ext_resource type="TileSet" uid="uid://bkmh84mhy0hhg" path="res://src/assets/wall_tile/tile_map/wall.tres" id="2_dmjg0"]
 [ext_resource type="Script" uid="uid://b3rbvxa8pa6v2" path="res://src/scripts/game/Match.cs" id="4_match"]
 [ext_resource type="PackedScene" uid="uid://5k5l45s2l75e" path="res://src/scenes/player/wizardPlayer.tscn" id="6_d3hki"]
+[ext_resource type="Texture2D" uid="uid://ektkdia8d7k8" path="res://src/assets/highlinght/atlases/choose.png" id="6_iwhwh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_khimi"]
+resource_name = "choose"
+texture = ExtResource("6_iwhwh")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_h8qtk"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_khimi")
 
 [node name="Match" type="Node2D" unique_id=1689643679 node_paths=PackedStringArray("World")]
 script = ExtResource("4_match")
@@ -32,6 +58,7 @@ tile_set = ExtResource("2_dmjg0")
 [node name="WizardPlayer" parent="World/Wizards" unique_id=55087306 instance=ExtResource("6_d3hki")]
 
 [node name="Highlight" type="TileMapLayer" parent="World" unique_id=1026202990]
+tile_set = SubResource("TileSet_h8qtk")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=269317906]
 
