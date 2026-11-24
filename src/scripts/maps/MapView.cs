@@ -15,7 +15,7 @@ public partial class MapView : Node2D
 	public TileMapLayer Obstacles { get; set; }
 
 	[Export]
-    public TileMapLayer Highlight { get; set; }
+	public TileMapLayer Highlight { get; set; }
 
 	public void Render(MapData map)
 	{
@@ -55,9 +55,8 @@ public partial class MapView : Node2D
 	}
 
 	public void ShowHighlight(Dictionary<Vector2I, int> reachableCells)
-    {
-        if (Highlight == null) return;
-
+	{
+		if (Highlight == null) return;
 	    _reachableHighlightCells.Clear();
         foreach (var pos in reachableCells.Keys)
 	        _reachableHighlightCells.Add(pos);
