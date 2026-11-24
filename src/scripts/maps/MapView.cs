@@ -6,6 +6,8 @@ namespace WizardBattle.Maps;
 
 public partial class MapView : Node2D
 {
+	private readonly HashSet<Vector2I> _reachableHighlightCells = new();
+
 	[Export]
 	public TileMapLayer Ground { get; set; }
 
@@ -55,11 +57,56 @@ public partial class MapView : Node2D
 	public void ShowHighlight(Dictionary<Vector2I, int> reachableCells)
 	{
 		if (Highlight == null) return;
+	    _reachableHighlightCells.Clear();
+        foreach (var pos in reachableCells.Keys)
+	        _reachableHighlightCells.Add(pos);
+
+	    RestoreReachableHighlights();
+    }
+
+	public void ShowPathPreview(IReadOnlyList<Vector2I> path, Vector2I startCell)
+	{
+		if (Highlight == null) return;
+
+		RestoreReachableHighlights();
+		for (int i = 0; i < path.Count; i++)
+		{
+			// На промежуточных клетках стрелка указывает на следующую клетку.
+			// На последней — в сторону, откуда маг пришёл; для пути из одной клетки
+			// источником направления служит стартовая позиция мага.
+			Vector2I previousCell = i == 0 ? startCell : path[i - 1];
+			Vector2I direction = i < path.Count - 1
+				? path[i + 1] - path[i]
+				: path[i] - previousCell;
+
+			Vector2I arrowAtlasCoords = direction switch
+			{
+				{ X: 0, Y: -1 } => new Vector2I(0, 1), // вверх
+				{ X: 0, Y: 1 } => new Vector2I(1, 1),  // вниз
+				{ X: -1, Y: 0 } => new Vector2I(2, 1), // влево
+				{ X: 1, Y: 0 } => new Vector2I(3, 1),  // вправо
+				_ => new Vector2I(0, 0)
+			};
+
+			Highlight.SetCell(path[i], sourceId: 0, atlasCoords: arrowAtlasCoords);
+		}
+	}
+
+	// При уходе курсора с доступной клетки восстанавливаем обычную подсветку диапазона.
+	public void ClearPathPreview() => RestoreReachableHighlights();
+
+	public void ClearSelectionHighlights()
+	{
+		_reachableHighlightCells.Clear();
+		Highlight?.Clear();
+	}
+
+	private void RestoreReachableHighlights()
+	{
+		if (Highlight == null) return;
 
 		Highlight.Clear();
-		foreach (var pos in reachableCells.Keys)
-		{
-			Highlight.SetCell(pos, sourceId: 0, atlasCoords: new Vector2I(0, 0));
-		}
+		foreach (var position in _reachableHighlightCells)
+			Highlight.SetCell(position, sourceId: 0, atlasCoords: new Vector2I(0, 0));
 	}
 }
