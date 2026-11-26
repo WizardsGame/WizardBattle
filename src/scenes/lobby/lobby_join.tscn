@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xyb6rt3fvw6r"]
 
 [ext_resource type="Script" uid="uid://dpkyheygdg7uf" path="res://src/scripts/lobby/LobbyJoin.cs" id="1_ln78i"]
-[ext_resource type="Texture2D" uid="uid://pfxe870f2ovy" path="res://src/assets/cross.svg" id="2_af3qs"]
+[ext_resource type="Texture2D" path="res://src/assets/back.svg" id="2_af3qs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ln78i"]
 bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
@@ -61,8 +61,9 @@ text = "Подключиться к лобби"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 0
+tooltip_text = "Назад"
 icon = ExtResource("2_af3qs")
 flat = true
 icon_alignment = 1

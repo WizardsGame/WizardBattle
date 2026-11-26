@@ -9,7 +9,7 @@ using WizardBattle.Session;
 
 public partial class Lobby : CanvasLayer
 {
-	[Export] public string CrossScenePath = "res://src/scenes/main/main.tscn";
+	[Export] public string BackScenePath = "res://src/scenes/main/main.tscn";
 	[Export] public string ContinueScenePath = "res://src/scenes/lobby/lobby_spells.tscn";
 
 	private VBoxContainer _wordVBox;
@@ -354,13 +354,13 @@ public partial class Lobby : CanvasLayer
 
 	private void OnBackButtonPressed()
 	{
-		if (ResourceLoader.Exists(CrossScenePath))
+		if (ResourceLoader.Exists(BackScenePath))
 		{
-			GetTree().ChangeSceneToFile(CrossScenePath);
+			GetTree().ChangeSceneToFile(BackScenePath);
 		}
 		else
 		{
-			GD.PrintErr($"Ошибка: Сцена по пути {CrossScenePath} не найдена!");
+			GD.PrintErr($"Ошибка: Сцена по пути {BackScenePath} не найдена!");
 		}
 	}
 

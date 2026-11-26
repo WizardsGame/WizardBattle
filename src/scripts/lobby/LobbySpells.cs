@@ -5,7 +5,7 @@ using WizardBattle.Session;
 
 public partial class LobbySpells : CanvasLayer
 {
-	[Export] public string CrossScenePath = "res://src/scenes/lobby/lobby.tscn";
+	[Export] public string BackScenePath = "res://src/scenes/lobby/lobby.tscn";
 	[Export] public string ContinueScenePath = "res://src/scenes/game/match.tscn";
 	[Export] public PackedScene SpellItemScene { get; set; }
 
@@ -69,7 +69,7 @@ public partial class LobbySpells : CanvasLayer
 
 	private void OnBackButtonPressed()
 	{
-		if (ChangeScene(CrossScenePath))
+		if (ChangeScene(BackScenePath))
 			SaveAssignments();
 	}
 
