@@ -3,5 +3,6 @@
   "cssTheme": "Material Gruvbox",
   "enabledCssSnippets": [
     "pastel"
-  ]
+  ],
+  "showRibbon": true
 }
