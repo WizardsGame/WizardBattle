@@ -1,0 +1,105 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/scripts/lobby/LobbySpells.cs" id="1_script"]
+[ext_resource type="Texture2D" path="res://src/assets/cross.svg" id="2_cross"]
+[ext_resource type="PackedScene" path="res://src/scenes/lobby/lobby_spell_item.tscn" id="3_item"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu"]
+bg_color = Color(0.43519226, 0.4351923, 0.43519217, 1)
+
+[node name="LobbySpells" type="CanvasLayer"]
+script = ExtResource("1_script")
+SpellItemScene = ExtResource("3_item")
+
+[node name="RootPanel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RootMargin" type="MarginContainer" parent="RootPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="MenuPanel" type="PanelContainer" parent="RootPanel/RootMargin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu")
+
+[node name="MenuVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel"]
+layout_mode = 2
+
+[node name="TitleHBox" type="HBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox"]
+layout_mode = 2
+
+[node name="LeftSpacer" type="Control" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/TitleHBox"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="ScreenTitleLabel" type="Label" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/TitleHBox"]
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Назначение заклинаний"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/TitleHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("2_cross")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SpellListMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+
+[node name="SpellListScroll" type="ScrollContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/SpellListMargin"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="SpellListScrollMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/SpellListMargin/SpellListScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 10
+
+[node name="SpellItemsVBox" type="VBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/SpellListMargin/SpellListScroll/SpellListScrollMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="ButtonsMargin" type="MarginContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ContinueButton" type="Button" parent="RootPanel/RootMargin/MenuPanel/MenuVBox/ButtonsMargin/ButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+disabled = true
+text = "Далее"
