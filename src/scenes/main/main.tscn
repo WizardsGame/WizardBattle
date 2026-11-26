@@ -41,6 +41,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="CreateLobbyButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=475895661]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(310, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
@@ -51,12 +52,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="JoinLobbyButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=2026795102]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(310, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Подключиться"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=121378390]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(350, 60)
 layout_mode = 2
 size_flags_horizontal = 4

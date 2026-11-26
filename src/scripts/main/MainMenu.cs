@@ -1,22 +1,23 @@
 using Godot;
+using WizardBattle.Session;
 
 public partial class MainMenu : Control
 {
-	[Export] public string JoinLobbyScenePath = "res://src/scenes/lobby/lobby_connecting.tscn";
+	[Export] public string JoinLobbyScenePath = "res://src/scenes/lobby/lobby_join.tscn";
 	[Export] public string CreateLobbyScenePath = "res://src/scenes/lobby/lobby.tscn";
 	[Export] public string SettingsScenePath = "тут должен быть путь на настройки";
 
 	public override void _Ready()
 	{
 	
-		var JoinLobbyButton = GetNode<Button>("VBoxContainer/HBoxContainer/JoinLobbyButton");
-		var CreateLobbyButton = GetNode<Button>("VBoxContainer/HBoxContainer/CreateLobbyButton");
-		var SettingsButton = GetNode<Button>("VBoxContainer/SettingsButton");
+		var joinLobbyButton = GetNode<Button>("%JoinLobbyButton");
+		var createLobbyButton = GetNode<Button>("%CreateLobbyButton");
+		var settingsButton = GetNode<Button>("%SettingsButton");
 
 		
-		JoinLobbyButton.Pressed += OnJoinLobbyButtonPressed;
-		CreateLobbyButton.Pressed += OnCreateLobbyButtonPressed;
-		SettingsButton.Pressed += OnSettingsButtonPressed;
+		joinLobbyButton.Pressed += OnJoinLobbyButtonPressed;
+		createLobbyButton.Pressed += OnCreateLobbyButtonPressed;
+		settingsButton.Pressed += OnSettingsButtonPressed;
 	}
 
 	private void OnJoinLobbyButtonPressed()
@@ -39,6 +40,7 @@ public partial class MainMenu : Control
 		
 		if (ResourceLoader.Exists(CreateLobbyScenePath))
 		{
+			GetNode<GameSession>("/root/GameSession").BeginPreparation();
 			GetTree().ChangeSceneToFile(CreateLobbyScenePath);
 		}
 		else

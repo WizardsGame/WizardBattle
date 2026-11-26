@@ -15,6 +15,10 @@ run/main_scene="uid://c5bo1ygo8taeo"
 config/features=PackedStringArray("4.7", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameSession="*res://src/scripts/session/GameSession.cs"
+
 [display]
 
 window/stretch/mode="canvas_items"

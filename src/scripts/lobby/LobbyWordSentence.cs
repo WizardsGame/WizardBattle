@@ -3,17 +3,23 @@ using System;
 
 public partial class LobbyWordSentence : PanelContainer
 {
+	public event Action RemoveRequested;
+
 	public override void _Ready()
 	{
-		var SentenceRemoveButton = GetNode<Button>("SentenceMargin/SentenceHBox/SentenceRemoveButton");
-		
-		SentenceRemoveButton.Pressed += SentenceRemoveButtonPressed;
+		var sentenceRemoveButton = GetNode<Button>("%SentenceRemoveButton");
+
+		sentenceRemoveButton.Pressed += OnSentenceRemoveButtonPressed;
 	}
-	
-	private void SentenceRemoveButtonPressed()
+
+	public void SetSentence(string text)
 	{
-		GD.Print("Нажата кнопка: Удалить предложение");
-		
-		QueueFree();
+		var label = GetNode<Label>("%SentenceLabel");
+		label.Text = text;
+	}
+
+	private void OnSentenceRemoveButtonPressed()
+	{
+		RemoveRequested?.Invoke();
 	}
 }
