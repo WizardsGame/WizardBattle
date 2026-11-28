@@ -2,16 +2,18 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using WizardBattle.Lessons;
 using WizardBattle.Session;
 
 public partial class Lobby : CanvasLayer
 {
-	[Export] public string CrossScenePath = "res://src/scenes/main/main.tscn";
-	[Export] public string ContinueScenePath = "на следующую сцену";
+	[Export] public string BackScenePath = "res://src/scenes/main/main.tscn";
+	[Export] public string ContinueScenePath = "res://src/scenes/lobby/lobby_spells.tscn";
 
 	private VBoxContainer _wordVBox;
+	private Button _continueButton;
 	private LessonDraft _draft;
 	private FileDialog _saveFileDialog;
 	private FileDialog _loadFileDialog;
@@ -56,7 +58,7 @@ public partial class Lobby : CanvasLayer
 		var wordAddButton = GetNode<Button>("%WordAddButton");
 		var saveToFileButton = GetNode<Button>("%SaveToFileButton");
 		var loadFromFileButton = GetNode<Button>("%LoadFromFileButton");
-		var continueButton = GetNode<Button>("%ContinueButton");
+		_continueButton = GetNode<Button>("%ContinueButton");
 		var backButton = GetNode<Button>("%BackButton");
 
 		var modalCancelButton = GetNode<Button>("%ModalCancelButton");
@@ -64,7 +66,7 @@ public partial class Lobby : CanvasLayer
 		wordAddButton.Pressed += OnWordAddButtonPressed;
 		saveToFileButton.Pressed += OnSaveToFileButtonPressed;
 		loadFromFileButton.Pressed += OnLoadFromFileButtonPressed;
-		continueButton.Pressed += OnContinueButtonPressed;
+		_continueButton.Pressed += OnContinueButtonPressed;
 		backButton.Pressed += OnBackButtonPressed;
 
 		_modalLineEdit.TextSubmitted += OnModalTextSubmitted;
@@ -95,6 +97,8 @@ public partial class Lobby : CanvasLayer
 
 		foreach (var entry in _draft.SentencesByWord)
 			ShowWord(entry.Key, entry.Value);
+
+		UpdateContinueButton();
 	}
 
 	private void AddWord(string text)
@@ -119,7 +123,7 @@ public partial class Lobby : CanvasLayer
 			OpenModal("Введите предложение с #ответами#:\n[i]Важно: мест вставки для одного слова может быть несколько.\nНапример, для глагола to howl: \"#Does# the black moon #howl#?\"[/i]", sentence =>
 			{
 				AddSentence(wordText, wordView, sentence);
-			}, ValidateSentenceMarkup);
+			}, ValidateSentence);
 		};
 		wordView.RemoveRequested += () => RemoveWord(wordText, wordView);
 
@@ -131,21 +135,23 @@ public partial class Lobby : CanvasLayer
 
 	private void AddSentence(string word, LobbyWord wordView, string sentenceText)
 	{
-		var sentences = _draft.SentencesByWord[word];
-		if (sentences.Contains(sentenceText))
-		{
-			GD.PrintErr("Это предложение уже добавлено к слову.");
-			return;
-		}
-
-		sentences.Add(sentenceText);
+		_draft.SentencesByWord[word].Add(sentenceText);
 		ShowSentence(word, wordView, sentenceText);
+		UpdateContinueButton();
 	}
 
-	private static string ValidateSentenceMarkup(string text)
+	private string ValidateSentence(string text)
 	{
-		SentenceMarkup.TryValidate(text, out var error);
-		return error;
+		if (!SentenceMarkup.TryValidate(text, out var error))
+			return error;
+
+		foreach (var entry in _draft.SentencesByWord)
+		{
+			if (entry.Value.Contains(text))
+				return $"Это предложение уже добавлено к слову \"{entry.Key}\".";
+		}
+
+		return null;
 	}
 
 	private void ShowSentence(string word, LobbyWord wordView, string text)
@@ -163,6 +169,7 @@ public partial class Lobby : CanvasLayer
 			_draft.SpellIdBySentence.Remove(sentence);
 
 		view.QueueFree();
+		UpdateContinueButton();
 	}
 
 	private void RemoveSentence(string word, string text, LobbyWordSentence view)
@@ -175,6 +182,7 @@ public partial class Lobby : CanvasLayer
 
 		_draft.SpellIdBySentence.Remove(text);
 		view.QueueFree();
+		UpdateContinueButton();
 	}
 
 	private void OnSaveToFileButtonPressed()
@@ -325,8 +333,15 @@ public partial class Lobby : CanvasLayer
 		_fileErrorDialog.PopupCentered();
 	}
 
+	private void UpdateContinueButton()
+	{
+		_continueButton.Disabled = !_draft.SentencesByWord.Values.Any(sentencesList => sentencesList.Count > 0);
+	}
+
 	private void OnContinueButtonPressed()
 	{
+		if (_continueButton.Disabled) return;
+
 		if (ResourceLoader.Exists(ContinueScenePath))
 		{
 			GetTree().ChangeSceneToFile(ContinueScenePath);
@@ -339,13 +354,13 @@ public partial class Lobby : CanvasLayer
 
 	private void OnBackButtonPressed()
 	{
-		if (ResourceLoader.Exists(CrossScenePath))
+		if (ResourceLoader.Exists(BackScenePath))
 		{
-			GetTree().ChangeSceneToFile(CrossScenePath);
+			GetTree().ChangeSceneToFile(BackScenePath);
 		}
 		else
 		{
-			GD.PrintErr($"Ошибка: Сцена по пути {CrossScenePath} не найдена!");
+			GD.PrintErr($"Ошибка: Сцена по пути {BackScenePath} не найдена!");
 		}
 	}
 

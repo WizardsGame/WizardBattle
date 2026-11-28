@@ -3,7 +3,7 @@ using System;
 
 public partial class LobbyJoin : CanvasLayer
 {
-	[Export] public string CrossScenePath = "res://src/scenes/main/main.tscn";
+	[Export] public string BackScenePath = "res://src/scenes/main/main.tscn";
 	[Export] public string JoinLobbyScenePath = "тут должен быть путь к сцене лобби";
 	
 	public override void _Ready()
@@ -33,13 +33,13 @@ public partial class LobbyJoin : CanvasLayer
 	{
 		GD.Print("Нажата кнопка: Крестик");
 		
-		if (ResourceLoader.Exists(CrossScenePath))
+		if (ResourceLoader.Exists(BackScenePath))
 		{
-			GetTree().ChangeSceneToFile(CrossScenePath);
+			GetTree().ChangeSceneToFile(BackScenePath);
 		}
 		else
 		{
-			GD.PrintErr($"Ошибка: Сцена по пути {CrossScenePath} не найдена!");
+			GD.PrintErr($"Ошибка: Сцена по пути {BackScenePath} не найдена!");
 		}
 	}
 }
